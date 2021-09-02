@@ -1,0 +1,91 @@
+:root {
+  --black: #000000;
+  --white: #FFFFFF;
+
+  --gray-700: #171717;
+  --gray-500: #1E1E1E;
+  --gray-300: #A6B6C8;
+  --gray-100: #F6F6F6;
+
+  --yellow: #FFBD09;
+  --red: #C10C0C;
+  --green: #74C96A;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+html {
+  // font-size: 15px;
+  scroll-behavior: smooth;
+}
+
+body {
+  // background: var(--gray-500);
+  // color: var(--white);
+}
+
+div.container {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+div.card {
+  padding: 2rem;
+  border-radius: 2rem;
+}
+
+div.card-light {
+  background-color: var(--gray-100);
+}
+
+div.card-white {
+  background-color: var(--white);
+}
+
+button {
+  height: 2rem;
+  border-radius: .5rem;
+  background-color: var(--black);
+  color: var(--white);
+  border: solid 1px var(--black);
+  padding: .25rem 1rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--gray-500);
+    color: var(--gray-100);
+    border: solid 1px var(--gray-500);
+  }
+}
+
+input {
+  height: 2rem;
+  border: solid 1px var(--gray-300);
+  border-radius: .5rem;
+  padding: .5rem;
+  &::placeholder {
+    //
+  }
+}
+
+img.logo {
+
+}
+
+aside.menu {
+
+}
+
+main.content {
+
+}
+
+footer.footer {
+
+}
