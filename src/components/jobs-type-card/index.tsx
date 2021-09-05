@@ -18,12 +18,17 @@ const dashboardJobsByTypeDefaults: DashboardJobsByType = {
 export const JobsTypeCard: React.FC<DashboardJobsByType> = ({
   month, year, jobsByType,
 }): ReactElement => {
-  const date = year && month ? new Date(year, month) : new Date();
+  const date = year && month ? new Date(year, month - 1) : new Date();
   const monthString = date.toLocaleString('pt-BR', { month: 'short' });
 
   return (
     <div className={`card card-black ${styles.jobs_card}`}>
-      <p>{`Jobs / ${monthString} ${String(year).substr(2)}`}</p>
+      <p>
+        Jobs
+        <span className="date">
+          {` / ${monthString} ${String(year).substr(2)}`}
+        </span>
+      </p>
 
       <table>
         <thead>

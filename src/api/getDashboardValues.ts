@@ -1,14 +1,7 @@
 import { get } from 'lodash';
 import { api } from '../config/axios';
 import { catchBlock } from '../error-handler/catchBlock';
-
-export type DashboardValues = {
-  month: number;
-  year: number;
-  expectedPaymentsAmount: number;
-  expectedBillsAmount: number;
-  expectedProfitAmount: number;
-};
+import { DashboardValues } from '../types/dashboard-values.type';
 
 export async function getDashboardValues(): Promise<DashboardValues | undefined> {
   try {

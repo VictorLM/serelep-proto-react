@@ -1,4 +1,6 @@
-import React, { ReactElement, useContext, useState } from 'react';
+import React, {
+  ReactElement, SyntheticEvent, useContext, useState,
+} from 'react';
 import { toast } from 'react-toastify';
 import isEmail from 'validator/lib/isEmail';
 import { Redirect } from 'react-router-dom';
@@ -12,7 +14,8 @@ export const LoginForm: React.FC = (): ReactElement => {
 
   const { isAuthenticated, handleLogin } = useContext(AuthContext);
 
-  async function login(): Promise<void> {
+  async function login(e: SyntheticEvent): Promise<void> {
+    e.preventDefault();
     // VALIDANDO FORM
     let formErrors = false;
     if (!isEmail(email)) {
@@ -38,7 +41,7 @@ export const LoginForm: React.FC = (): ReactElement => {
         <img src="/images/logo_black.png" className="logo" alt="Logo" />
       </div>
       <h2>Bem vindo ao Serelep Prototype</h2>
-      <form>
+      <form onSubmit={(e) => login(e)}>
         <label htmlFor="email">
           Email
           <input
@@ -61,7 +64,7 @@ export const LoginForm: React.FC = (): ReactElement => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button type="button" onClick={() => login()}>Login</button>
+        <button type="submit" className="btn-black">Login</button>
       </form>
     </div>
   );

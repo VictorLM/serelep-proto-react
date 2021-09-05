@@ -6,7 +6,7 @@ section.section {
       display: flex;
       align-items: center;
       gap: 2rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 
     div.jobs_chart {
@@ -14,14 +14,15 @@ section.section {
       justify-content: space-between;
 
       div.chart {
-        width: 66.666%;
-        // flex-grow: 3;
-
+        width: 65%;
       }
 
       div.jobs {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
         width: 31%;
-        // flex-grow: 1;
+        padding-top: 1rem;
       }
 
     }

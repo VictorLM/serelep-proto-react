@@ -3,6 +3,7 @@ div.div {
   height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   div.loader {
     border: .5rem solid var(--gray-300);

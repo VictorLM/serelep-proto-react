@@ -26,18 +26,18 @@ export const ValueCard: React.FC<ValueCard> = ({
   if (type === 'payment') {
     title = 'Faturamento';
     icon = 'happy_money.png';
-    spanColor = <span className={styles.yellow}>&#11044;</span>;
+    spanColor = <span className="yellow">&#11044;</span>;
   } else if (type === 'bills') {
     title = 'Despesas';
     icon = 'sad_money.png';
-    spanColor = <span className={styles.red}>&#11044;</span>;
+    spanColor = <span className="red">&#11044;</span>;
   } else if (type === 'profit') {
     title = 'Previsão de Lucro';
     icon = 'evolution_arrow.png';
-    spanColor = <span className={styles.green}>&#11044;</span>;
+    spanColor = <span className="green">&#11044;</span>;
   }
 
-  const date = year && month ? new Date(year, month) : new Date();
+  const date = year && month ? new Date(year, month - 1) : new Date();
   const monthString = date.toLocaleString('pt-BR', { month: 'short' });
 
   return (
@@ -46,9 +46,14 @@ export const ValueCard: React.FC<ValueCard> = ({
         <img src={`/images/${icon}`} alt="" />
         {spanColor}
       </div>
+
       <p className={styles.title}>
-        {`${title} / ${monthString} ${String(year).substr(2)}`}
+        {`${title}`}
+        <span className="date">
+          {` / ${monthString} ${String(year).substr(2)}`}
+        </span>
       </p>
+
       <p className={Math.sign(value ?? 0) === -1 ? styles.value_negative : styles.value}>
         {`R$ ${value?.toFixed(2).replace('.', ',')}`}
       </p>

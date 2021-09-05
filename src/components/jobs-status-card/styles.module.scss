@@ -1,0 +1,32 @@
+div.jobs_status {
+  padding: 1rem;
+
+  p {
+    color: var(--gray-100);
+    font-size: .9rem;
+    margin: .5rem 0 .8rem 0;
+  }
+
+  table {
+    width: 100%;
+    padding: 0 .5rem;
+
+    tr {
+      height: 1.5rem;
+    }
+
+    td {
+      font-weight: 300;
+      font-size: 0.8rem;
+      width: 33.333%;
+      text-align: right;
+      color: var(--gray-100);
+      &:first-of-type {
+        text-align: left;
+      }
+
+    }
+
+  }
+
+}

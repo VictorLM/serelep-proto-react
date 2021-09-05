@@ -43,7 +43,7 @@ main.main {
 
 section.main-section {
   background-color: var(--gray-500);
-  padding: 4rem 3rem;
+  padding: 3rem;
 }
 
 div.card {
@@ -103,6 +103,23 @@ div.title-subtitle {
     color: var(--gray-300);
     font-weight: 300;
   }
+}
+
+span.yellow {
+  color: var(--yellow);
+}
+
+span.red {
+  color: var(--red);
+}
+
+span.green {
+  color: var(--green);
+}
+
+span.date {
+  font-weight: 300;
+  font-size: .8rem;
 }
 
 img.logo {

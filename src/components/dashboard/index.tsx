@@ -1,7 +1,11 @@
 import React, { ReactElement, useEffect, useState } from 'react';
+import { getDashboardChartValues } from '../../api/getDashboardChartValues';
 import { getDashboardJobs } from '../../api/getDashboardJobs';
-import { DashboardValues, getDashboardValues } from '../../api/getDashboardValues';
+import { getDashboardValues } from '../../api/getDashboardValues';
 import { DashboardJobs } from '../../types/dashboard-jobs.type';
+import { DashboardValues } from '../../types/dashboard-values.type';
+import { ValuesChart } from '../chart';
+import { JobsStatusCard } from '../jobs-status-card';
 import { JobsTypeCard } from '../jobs-type-card';
 import { Loader } from '../loader';
 import { TopBar } from '../template/top-bar';
@@ -14,6 +18,8 @@ export const Dashoboard: React.FC = (): ReactElement => {
   const [loadingValues, setLoadingValues] = useState(true);
   const [jobs, setJobs] = useState<DashboardJobs>();
   const [loadingJobs, setLoadingJobs] = useState(true);
+  const [chartValues, setChartValues] = useState<DashboardValues[]>();
+  const [loadingChartValues, setLoadingChartValues] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -28,6 +34,14 @@ export const Dashoboard: React.FC = (): ReactElement => {
       const foundJobs = await getDashboardJobs();
       setJobs(foundJobs);
       setLoadingJobs(false);
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const foundChartValues = await getDashboardChartValues();
+      setChartValues(foundChartValues);
+      setLoadingChartValues(false);
     })();
   }, []);
 
@@ -67,9 +81,13 @@ export const Dashoboard: React.FC = (): ReactElement => {
           )}
 
         <div className={styles.jobs_chart}>
-
+          {/* <ValuesChart /> */}
           <div className={styles.chart}>
-            CHART
+            {loadingChartValues ? <Loader /> : (
+              <ValuesChart
+                chartValues={chartValues}
+              />
+            ) }
           </div>
 
           {loadingJobs ? <Loader />
@@ -79,6 +97,12 @@ export const Dashoboard: React.FC = (): ReactElement => {
                   month={jobs?.month}
                   year={jobs?.year}
                   jobsByType={jobs?.jobs?.byType}
+                />
+
+                <JobsStatusCard
+                  month={jobs?.month}
+                  year={jobs?.year}
+                  jobsByStatus={jobs?.jobs?.byStatus}
                 />
               </div>
             )}
