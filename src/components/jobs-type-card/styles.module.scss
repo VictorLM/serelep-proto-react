@@ -1,0 +1,27 @@
+div.jobs_card {
+  padding: 1rem;
+
+  p {
+    color: var(--gray-100);
+    font-size: .9rem;
+    margin: .5rem 0 1rem 0;
+  }
+
+  table {
+    margin: 1rem 0;
+
+    td, th {
+      font-size: 0.8rem;
+      width: 20%;
+      text-align: center;
+      color: var(--gray-100);
+    }
+
+    th {
+      font-weight: 300;
+      padding-bottom: 1rem;
+      // margin-bottom: 1rem;
+    }
+  }
+
+}

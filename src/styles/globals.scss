@@ -33,11 +33,22 @@ body {
 div.container {
   max-width: 1920px;
   margin: 0 auto;
+  min-height: 100vh;
+}
+
+main.main {
+  display: flex;
+  min-height: 100vh;
+}
+
+section.main-section {
+  background-color: var(--gray-500);
+  padding: 4rem 3rem;
 }
 
 div.card {
   padding: 2rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
 }
 
 div.card-light {
@@ -48,7 +59,17 @@ div.card-white {
   background-color: var(--white);
 }
 
+div.card-black {
+  background-color: var(--gray-500);
+  color: var(--white);
+}
+
 button {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+button.btn-black {
   height: 2rem;
   border-radius: .5rem;
   background-color: var(--black);
@@ -71,6 +92,16 @@ input {
   padding: .5rem;
   &::placeholder {
     //
+  }
+}
+
+div.title-subtitle {
+  h1 {
+    font-size: 2rem;
+  }
+  small {
+    color: var(--gray-300);
+    font-weight: 300;
   }
 }
 

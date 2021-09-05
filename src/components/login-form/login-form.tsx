@@ -1,14 +1,16 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import isEmail from 'validator/lib/isEmail';
-import { get } from 'lodash';
-import { api } from '../../config/axios';
+import { Redirect } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 import styles from './styles.module.scss';
 
 export const LoginForm: React.FC = (): ReactElement => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const { isAuthenticated, handleLogin } = useContext(AuthContext);
 
   async function login(): Promise<void> {
     // VALIDANDO FORM
@@ -23,40 +25,11 @@ export const LoginForm: React.FC = (): ReactElement => {
       toast.error('Senha deve ter entre 6 e 255 caracteres');
     }
 
-    if (formErrors) return;
+    if (!formErrors) handleLogin(email, password);
+  }
 
-    const body = {
-      email,
-      password,
-    };
-
-    try {
-      const { data } = await api.post('/auth/login', body);
-      console.log(data);
-      // LIMPAR FORM
-      setPassword('');
-      setEmail('');
-    } catch (err: unknown) {
-      //
-      console.log(err);
-      let errors = { message: ['Erro ao processar operação'] };
-
-      if (get(err, 'response', null)) {
-        // HOUVE RESPOSTA COM ERROR CODE
-        errors.message = (get(err, 'response.data.message', null)) && (get(err, 'response.data.message', null));
-      } else if (get(err, 'request', null)) {
-        // NÃO HOUVE RESPOSTA
-        errors = { message: ['Nossos servidores não estão respondendo. Por favor, tente novamente mais tarde'] };
-      }
-
-      if (Array.isArray(errors.message)) {
-        errors.message.map((error) => toast.error(error));
-      } else if (typeof errors.message === 'string') {
-        toast.error(errors.message);
-      } else {
-        toast.error('Erro ao processar operação');
-      }
-    }
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
   }
 
   return (

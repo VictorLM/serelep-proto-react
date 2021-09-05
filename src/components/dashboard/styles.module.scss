@@ -1,0 +1,30 @@
+section.section {
+
+  div {
+
+    div.values {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    div.jobs_chart {
+      display: flex;
+      justify-content: space-between;
+
+      div.chart {
+        width: 66.666%;
+        // flex-grow: 3;
+
+      }
+
+      div.jobs {
+        width: 31%;
+        // flex-grow: 1;
+      }
+
+    }
+  }
+
+}

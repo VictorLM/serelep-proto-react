@@ -1,12 +1,24 @@
 import React, { ReactElement } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { LoginPage } from './pages/login/login';
+import { Router } from 'react-router-dom';
+import history from './history/history';
+
+import { AuthProvider } from './context/AuthContext';
+
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/globals.scss';
+import Routes from './routes/routes';
 
 export const App: React.FC = (): ReactElement => (
-  <div className="container">
-    <ToastContainer />
-    <LoginPage />
-  </div>
+  <AuthProvider>
+    <div className="container">
+      <ToastContainer />
+
+      <Router history={history}>
+        <Routes />
+      </Router>
+
+    </div>
+  </AuthProvider>
+
 );

@@ -1,0 +1,52 @@
+header.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  button.filters {
+    padding: .5rem .75rem;
+    border: solid 2px var(--gray-300);
+    background-color: var(--gray-100);
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  div.user {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    p {
+      font-weight: 300;
+      font-size: .8rem;
+      color: var(--gray-500);
+    }
+
+    img {
+      padding: .1rem;
+      border: 2px solid var(--gray-300);
+      border-radius: .8rem;
+      max-height: 2.5rem;
+      max-width: 2.5rem;
+    }
+
+    button {
+      height: 1rem;
+      font-size: .7rem;
+      padding: 0 0;
+      text-decoration: underline;
+      background-color: var(--gray-100);
+      border: none;
+      color: var(--gray-300);
+      &:hover {
+        color: var(--gray-500);
+      }
+    }
+  }
+}
