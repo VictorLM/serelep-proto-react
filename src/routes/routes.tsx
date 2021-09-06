@@ -4,20 +4,22 @@ import {
 } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { LoginPage } from '../pages/login';
+import { Loader } from '../components/loader';
 import { DashboardPage } from '../pages/dashboard';
+import { CustomersPage } from '../pages/customers';
 
 interface CustomRouteType extends RouteProps {
   isPrivate: boolean,
 }
 
 const CustomRoute: React.FC<CustomRouteType> = ({ isPrivate, ...rest }) => {
-  const { loading, isAuthenticated } = useContext(AuthContext);
+  const { loading, user } = useContext(AuthContext);
 
   if (loading) {
-    return <h1>Carregando...</h1>;
+    return <Loader />;
   }
 
-  if (isPrivate && !isAuthenticated) {
+  if (isPrivate && !user) {
     return <Redirect to="/login" />;
   }
   /* eslint-disable-next-line react/jsx-props-no-spreading */
@@ -29,7 +31,8 @@ export default function Routes(): ReactElement {
     <Switch>
       <CustomRoute isPrivate={false} path="/" exact component={() => <Redirect to="/login" />} />
       <CustomRoute isPrivate={false} exact path="/login" component={LoginPage} />
-      <CustomRoute isPrivate exact path="/dashboard" component={DashboardPage} />
+      <CustomRoute isPrivate path="/dashboard" component={DashboardPage} />
+      <CustomRoute isPrivate path="/clientes" component={CustomersPage} />
       {/* <Route path="/login" component={LoginPage} /> 404 - TODO */}
     </Switch>
   );

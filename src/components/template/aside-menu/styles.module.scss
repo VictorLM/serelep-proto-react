@@ -2,7 +2,7 @@ aside.aside {
   width: 20%;
   background-color: var(--gray-700);
   color: var(--white);
-  padding: 3rem;
+  padding: 3rem 3rem 5rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -66,4 +66,13 @@ aside.aside {
       border-radius: 10%;
     }
   }
+}
+
+@media only screen and (min-width: 1367px) {
+
+  aside.aside {
+    width: 15%;
+    padding: 6rem 6rem 10rem 6rem;
+  }
+
 }

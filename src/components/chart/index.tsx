@@ -1,5 +1,5 @@
 import React, {
-  ReactElement, useEffect, useRef,
+  ReactElement, useEffect, useRef, useState,
 } from 'react';
 import {
   Chart, registerables, ChartConfiguration, ChartOptions, ChartData,
@@ -17,8 +17,8 @@ const dashboardChartValuesDefaults: DashboardChartValues = {
 export const ValuesChart: React.FC<DashboardChartValues> = ({
   chartValues,
 }): ReactElement => {
-  // const [isRebuildingCanvas, setIsRebuildingCanvas] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [chart, setChart] = useState<Chart | null>(null);
 
   const labels: string[] = [];
   const payments: number[] = [];
@@ -43,28 +43,28 @@ export const ValuesChart: React.FC<DashboardChartValues> = ({
         label: 'Despesas',
         borderColor: 'rgba(193, 12, 12, 1)',
         borderWidth: 1,
-        backgroundColor: 'rgba(193, 12, 12, .1)',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
         hoverBackgroundColor: 'rgba(193, 12, 12, 1)',
-        borderRadius: 5,
+        // borderRadius: 5,
         data: bills.reverse(),
         order: 4,
-      },
-      {
-        label: 'Lucro',
-        borderColor: 'rgba(116, 201, 106, 1)',
-        borderWidth: 1,
-        backgroundColor: 'rgba(116, 201, 106, .1)',
-        hoverBackgroundColor: 'rgba(116, 201, 106, 1)',
-        data: profit.reverse(),
-        order: 3,
       },
       {
         label: 'Faturamento',
         borderColor: 'rgba(255, 189, 9, 1)',
         borderWidth: 1,
-        backgroundColor: 'rgba(255, 189, 9, .1)',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
         hoverBackgroundColor: 'rgba(255, 189, 9, .75)',
         data: payments.reverse(),
+        order: 3,
+      },
+      {
+        label: 'Lucro',
+        borderColor: 'rgba(116, 201, 106, 1)',
+        borderWidth: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        hoverBackgroundColor: 'rgba(116, 201, 106, 1)',
+        data: profit.reverse(),
         order: 2,
       },
       {
@@ -72,9 +72,9 @@ export const ValuesChart: React.FC<DashboardChartValues> = ({
         label: 'Evolução Lucro',
         backgroundColor: 'rgba(30, 30, 30, .75)',
         borderColor: 'rgba(30, 30, 30, .75)',
-        tension: 0.1,
-        pointRadius: 6,
-        pointHoverRadius: 6,
+        tension: 0.2,
+        pointRadius: 5,
+        pointHoverRadius: 5,
         data: profit,
         order: 1,
       },
@@ -86,6 +86,23 @@ export const ValuesChart: React.FC<DashboardChartValues> = ({
       yAxes: { stacked: true },
       xAxes: { stacked: true },
     },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label(context) {
+            let label = context.dataset.label || '';
+
+            if (label) {
+              label += ': ';
+            }
+            if (context.parsed.y !== null) {
+              label += new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(context.parsed.y);
+            }
+            return label;
+          },
+        },
+      },
+    },
   };
 
   const config: ChartConfiguration = {
@@ -94,19 +111,18 @@ export const ValuesChart: React.FC<DashboardChartValues> = ({
     options,
   };
 
+  // eslint-disable-next-line
   useEffect(() => {
-    // TODO - Não está funcionando
-    // if (isRebuildingCanvas) {
-    //   return;
-    // }
+    if (chart) chart.destroy();
     Chart.register(...registerables);
     const chartCanvas = canvasRef.current;
     if (chartCanvas) {
       // TODO
       // eslint-disable-next-line
       const chart = new Chart(chartCanvas, config);
+      setChart(chart);
     }
-  }, []);
+  });
 
   return (
     <canvas ref={canvasRef} />

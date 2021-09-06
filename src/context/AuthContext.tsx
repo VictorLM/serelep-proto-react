@@ -4,7 +4,6 @@ import { User } from '../types/user.type';
 import AuthContextProvider from './AuthContextProvider';
 
 export interface AuthContextInterface {
-  isAuthenticated: boolean;
   user: User | undefined;
   loading: boolean;
   handleLogin: (email: string, password: string) => void;
@@ -12,7 +11,6 @@ export interface AuthContextInterface {
 }
 
 export const authContextDefaults: AuthContextInterface = {
-  isAuthenticated: false,
   user: undefined,
   loading: true,
   handleLogin: () => null,

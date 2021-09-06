@@ -42,13 +42,27 @@ main.main {
 }
 
 section.main-section {
+  width: 80%;
   background-color: var(--gray-500);
-  padding: 3rem;
+  padding: 3rem 3rem 1.5rem 3rem;
+}
+
+@media only screen and (min-width: 1367px) {
+  section.main-section {
+    width: 85%;
+    padding: 5rem 6rem 2rem 6rem;
+  }
 }
 
 div.card {
   padding: 2rem;
   border-radius: 1rem;
+}
+
+@media only screen and (min-width: 1367px) {
+  div.card {
+    padding: 3rem 4rem;
+  }
 }
 
 div.card-light {
@@ -85,8 +99,10 @@ button.btn-black {
   }
 }
 
-input {
-  height: 2rem;
+input, select {
+  font-weight: 300;
+  height: 2.2rem;
+  background-color: var(--gray-100);
   border: solid 1px var(--gray-300);
   border-radius: .5rem;
   padding: .5rem;
@@ -95,14 +111,91 @@ input {
   }
 }
 
+option {
+  height: 2.2rem;
+}
+
+div.filters {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 3rem;
+
+  form {
+    display: flex;
+    align-items: center;
+
+    input {
+      border-right: none;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    button.search-btn, button.update-btn {
+      border: solid 1px var(--gray-300);
+      border-radius: .5rem;
+      padding: .42rem .5rem;
+      img {
+        max-height: 1rem;
+        max-width: 1rem;
+        transition: all 0.2s ease-in-out;
+      }
+      &:hover {
+        border: solid 1px var(--gray-500);
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    button.search-btn {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-right: 1rem;
+    }
+
+  }
+
+}
+
 div.title-subtitle {
   h1 {
     font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    a {
+      color: var(--gray-500);
+      font-size: 1rem;
+      font-weight: 300;
+      border: solid 1px var(--gray-300);
+      border-radius: .8rem;
+      padding: .5rem 1rem;
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+      &:active, &:visited {
+        color: inherit;
+      }
+      img {
+        margin-right: .5rem;
+        max-height: .8rem;
+        max-width: .8rem;
+      }
+      &:hover {
+        transform: scale(1.05);
+        color: var(--gray-700);
+        font-weight: 500;
+        border: solid 1px var(--gray-700);
+      }
+    }
+
   }
   small {
     color: var(--gray-300);
     font-weight: 300;
   }
+
 }
 
 span.yellow {
@@ -120,6 +213,18 @@ span.green {
 span.date {
   font-weight: 300;
   font-size: .8rem;
+}
+
+tr.not-found-results {
+  td {
+    border-bottom: none !important;
+    h2 {
+      text-align: center;
+      margin: 1rem;
+      font-weight: 300;
+      color: var(--gray-300);
+    }
+  }
 }
 
 img.logo {

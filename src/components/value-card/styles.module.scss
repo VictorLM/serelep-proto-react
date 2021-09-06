@@ -34,3 +34,11 @@ div.value_card {
     color: var(--red);
   }
 }
+
+@media only screen and (min-width: 1367px) {
+
+  div.value_card {
+    padding: 2rem;
+  }
+
+}

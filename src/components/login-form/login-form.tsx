@@ -12,7 +12,7 @@ export const LoginForm: React.FC = (): ReactElement => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { isAuthenticated, handleLogin } = useContext(AuthContext);
+  const { user, handleLogin } = useContext(AuthContext);
 
   async function login(e: SyntheticEvent): Promise<void> {
     e.preventDefault();
@@ -31,7 +31,7 @@ export const LoginForm: React.FC = (): ReactElement => {
     if (!formErrors) handleLogin(email, password);
   }
 
-  if (isAuthenticated) {
+  if (user) {
     return <Redirect to="/dashboard" />;
   }
 

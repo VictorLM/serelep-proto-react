@@ -11,7 +11,7 @@ export async function getUser(): Promise<User | undefined> {
       id: get(data, '_id', null),
       name: get(data, 'name', null),
       email: get(data, 'email', null),
-      createdAt: get(data, 'createdAt', null),
+      createdAt: new Date(get(data, 'createdAt', null)),
     };
 
     return userData;

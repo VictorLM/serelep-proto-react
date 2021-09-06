@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
-import { Dashboard } from '../../components/dashboard';
+import { Customers } from '../../components/customers';
 import { AsideMenu } from '../../components/template/aside-menu';
 
-export const DashboardPage: React.FC = (): ReactElement => (
+export const CustomersPage: React.FC = (): ReactElement => (
   <main className="main">
     <AsideMenu />
-    <Dashboard />
+    <Customers />
   </main>
 );

@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-
-// import api from '../../api';
 import history from '../history/history';
 import { AuthContextInterface } from './AuthContext';
 import { login } from '../api/login';
@@ -9,15 +7,14 @@ import { User } from '../types/user.type';
 import { logout } from '../api/logout';
 
 export default function AuthContextProvider(): AuthContextInterface {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
+      if (history.location.pathname === '/login') return;
       const foundUser = await getUser();
       if (foundUser) {
-        setIsAuthenticated(true);
         setUser(foundUser);
       }
       setLoading(false);
@@ -29,7 +26,6 @@ export default function AuthContextProvider(): AuthContextInterface {
     password: string,
   ): Promise<void> {
     if (await login(email, password)) {
-      setIsAuthenticated(true);
       setLoading(false);
       history.push('/dashboard');
     }
@@ -38,13 +34,12 @@ export default function AuthContextProvider(): AuthContextInterface {
   async function handleLogout(): Promise<void> {
     if (await logout()) {
       setUser(undefined);
-      setIsAuthenticated(false);
       setLoading(false);
       history.push('/login');
     }
   }
 
   return {
-    isAuthenticated, user, loading, handleLogin, handleLogout,
+    user, loading, handleLogin, handleLogout,
   };
 }

@@ -8,12 +8,13 @@ import { ValuesChart } from '../chart';
 import { JobsStatusCard } from '../jobs-status-card';
 import { JobsTypeCard } from '../jobs-type-card';
 import { Loader } from '../loader';
+import { Footer } from '../template/footer';
 import { TopBar } from '../template/top-bar';
 import { ValueCard } from '../value-card';
 
 import styles from './styles.module.scss';
 
-export const Dashoboard: React.FC = (): ReactElement => {
+export const Dashboard: React.FC = (): ReactElement => {
   const [values, setValues] = useState<DashboardValues>();
   const [loadingValues, setLoadingValues] = useState(true);
   const [jobs, setJobs] = useState<DashboardJobs>();
@@ -52,6 +53,7 @@ export const Dashoboard: React.FC = (): ReactElement => {
         <TopBar
           title="Dashboard"
           subtitle="Bem vindo ao controle financeiro =)"
+          addButton={false}
         />
 
         {loadingValues ? <Loader />
@@ -110,6 +112,7 @@ export const Dashoboard: React.FC = (): ReactElement => {
         </div>
 
       </div>
+      <Footer />
     </section>
   );
 };
