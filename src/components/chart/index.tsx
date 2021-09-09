@@ -40,51 +40,51 @@ export const ValuesChart: React.FC<DashboardChartValues> = ({
     labels: labels.reverse(),
     datasets: [
       {
+        type: 'line',
+        label: 'Evolução Lucro',
+        backgroundColor: 'rgba(30, 30, 30, 1)',
+        borderColor: 'rgba(30, 30, 30, 1)',
+        tension: 0.2,
+        // pointRadius: 5,
+        // pointHoverRadius: 5,
+        data: profit,
+        order: 1,
+      },
+      {
         label: 'Despesas',
-        borderColor: 'rgba(193, 12, 12, 1)',
+        // borderColor: 'rgba(193, 12, 12, 1)',
         borderWidth: 1,
-        backgroundColor: 'rgba(255, 255, 255, 0)',
+        backgroundColor: '#B5B5B5',
         hoverBackgroundColor: 'rgba(193, 12, 12, 1)',
         // borderRadius: 5,
         data: bills.reverse(),
-        order: 4,
-      },
-      {
-        label: 'Faturamento',
-        borderColor: 'rgba(255, 189, 9, 1)',
-        borderWidth: 1,
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        hoverBackgroundColor: 'rgba(255, 189, 9, .75)',
-        data: payments.reverse(),
-        order: 3,
-      },
-      {
-        label: 'Lucro',
-        borderColor: 'rgba(116, 201, 106, 1)',
-        borderWidth: 1,
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        hoverBackgroundColor: 'rgba(116, 201, 106, 1)',
-        data: profit.reverse(),
         order: 2,
       },
       {
-        type: 'line',
-        label: 'Evolução Lucro',
-        backgroundColor: 'rgba(30, 30, 30, .75)',
-        borderColor: 'rgba(30, 30, 30, .75)',
-        tension: 0.2,
-        pointRadius: 5,
-        pointHoverRadius: 5,
-        data: profit,
-        order: 1,
+        label: 'Lucro',
+        // borderColor: 'rgba(116, 201, 106, 1)',
+        borderWidth: 1,
+        backgroundColor: '#828282',
+        hoverBackgroundColor: 'rgba(116, 201, 106, 1)',
+        data: profit.reverse(),
+        order: 3,
+      },
+      {
+        label: 'Faturamento',
+        // borderColor: 'rgba(255, 189, 9, 1)',
+        borderWidth: 1,
+        backgroundColor: '#4A494A',
+        hoverBackgroundColor: 'rgba(255, 189, 9, .75)',
+        data: payments.reverse(),
+        order: 4,
       },
     ],
   };
 
   const options: ChartOptions = {
     scales: {
-      yAxes: { stacked: true },
-      xAxes: { stacked: true },
+      // yAxes: { stacked: true },
+      // xAxes: { stacked: true },
     },
     plugins: {
       tooltip: {
@@ -113,16 +113,19 @@ export const ValuesChart: React.FC<DashboardChartValues> = ({
 
   // eslint-disable-next-line
   useEffect(() => {
-    if (chart) chart.destroy();
-    Chart.register(...registerables);
+    if (chart) {
+      chart.destroy();
+    } else {
+      Chart.register(...registerables);
+    }
     const chartCanvas = canvasRef.current;
     if (chartCanvas) {
-      // TODO
-      // eslint-disable-next-line
-      const chart = new Chart(chartCanvas, config);
-      setChart(chart);
+      const chartjs = new Chart(chartCanvas, config);
+      setChart(chartjs);
     }
-  });
+    // TODO
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <canvas ref={canvasRef} />

@@ -9,6 +9,7 @@ type CustomerApi = {
   email: string;
   contact: string;
   doc: string;
+  notes?: string;
   createdAt: string;
 }
 

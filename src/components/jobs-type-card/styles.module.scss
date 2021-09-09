@@ -1,5 +1,5 @@
 div.jobs_card {
-  padding: 1rem;
+  padding: 1rem !important;
 
   p {
     color: var(--gray-100);
@@ -28,7 +28,7 @@ div.jobs_card {
 @media only screen and (min-width: 1367px) {
 
   div.jobs_card {
-    padding: 2rem;
+    padding: 2rem !important;
   }
 
 }

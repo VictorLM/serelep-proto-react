@@ -3,13 +3,12 @@ import React, {
 } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { deleteCustomer } from '../../api/deleteCustomer';
 import { getCustomers } from '../../api/getCustomers';
 import { Customer } from '../../types/customer.type';
 import { Loader } from '../loader';
 import { Footer } from '../template/footer';
 import { TopBar } from '../template/top-bar';
-
-import styles from './styles.module.scss';
 
 export const Customers: React.FC = (): ReactElement => {
   const [customers, setCustomers] = useState<Customer[]>();
@@ -20,35 +19,50 @@ export const Customers: React.FC = (): ReactElement => {
   async function getInitialCustomers(): Promise<void> {
     setLoadingCustomers(true);
     setSearch('');
+    setOrderBy('DESC');
     const foundCustomers = await getCustomers({});
     setCustomers(foundCustomers);
     setLoadingCustomers(false);
   }
 
-  async function getCustomersWithSearchQuery(e: SyntheticEvent): Promise<void> {
-    e.preventDefault();
+  async function getCustomersWithFilters(e?: SyntheticEvent): Promise<void> {
+    if (e) e.preventDefault();
     // VALIDANDO FORM
-    if (search.length < 1 || search.length > 50) {
-      toast.error('Pesquisa inválida');
+    if (search) {
+      if (search.length < 1 || search.length > 50) {
+        toast.error('Pesquisa inválida');
+        return;
+      }
+    }
+
+    if (orderBy !== 'ASC' && orderBy !== 'DESC') {
+      toast.error('Ordenar inválido');
       return;
     }
 
     setLoadingCustomers(true);
-    const foundCustomers = await getCustomers({ search });
+    const query = {
+      orderBy,
+      search,
+    };
+    const foundCustomers = await getCustomers(query);
     setCustomers(foundCustomers);
     setLoadingCustomers(false);
   }
 
-  async function getCustomersWithOrderQuery(selectedOrderBy: string): Promise<void> {
-    if (selectedOrderBy !== 'ASC' && selectedOrderBy !== 'DESC') {
-      toast.error('Ordenar inválido');
-      return;
+  async function handleDelete(id: string): Promise<void> {
+    // eslint-disable-next-line
+    const confirmation = window.confirm('Deseja realmente excluir este Cliente?');
+    if (confirmation) {
+      await deleteCustomer(id);
+      toast.success('Cliente excluído com sucesso');
+      await getInitialCustomers();
     }
-    setOrderBy(selectedOrderBy);
-    setLoadingCustomers(true);
-    const foundCustomers = await getCustomers({ orderBy });
-    setCustomers(foundCustomers);
-    setLoadingCustomers(false);
+  }
+
+  async function handleOnChangeSelect(orderByChangedValue: string): Promise<void> {
+    setOrderBy(orderByChangedValue);
+    await getCustomersWithFilters();
   }
 
   useEffect(() => {
@@ -58,7 +72,7 @@ export const Customers: React.FC = (): ReactElement => {
   }, []);
 
   return (
-    <section className={`main-section ${styles.section}`}>
+    <section className="main-section">
       <div className="card card-light">
 
         <TopBar
@@ -69,20 +83,20 @@ export const Customers: React.FC = (): ReactElement => {
 
         {loadingCustomers ? <Loader />
           : (
-            <div className={styles.customers}>
+            <div>
 
               <div className="filters">
 
                 <select
                   name="orderby"
                   value={orderBy}
-                  onChange={(e) => getCustomersWithOrderQuery(e.target.value)}
+                  onChange={(e) => handleOnChangeSelect(e.target.value)}
                 >
                   <option value="DESC">Nome A-Z</option>
                   <option value="ASC">Nome Z-A</option>
                 </select>
 
-                <form onSubmit={(e) => getCustomersWithSearchQuery(e)}>
+                <form onSubmit={(e) => getCustomersWithFilters(e)}>
                   <input
                     type="text"
                     name="search"
@@ -100,7 +114,7 @@ export const Customers: React.FC = (): ReactElement => {
 
               </div>
 
-              <table cellSpacing="0">
+              <table className="model-list" cellSpacing="0">
                 <thead>
                   <tr>
                     <th>Nome</th>
@@ -117,17 +131,21 @@ export const Customers: React.FC = (): ReactElement => {
                     customers?.map((customer) => (
 
                       <tr key={customer.id}>
-                        <td>{customer.name}</td>
+                        <td className="link-view">
+                          <Link to={`/clientes/${customer.id}`}>
+                            {customer.name}
+                          </Link>
+                        </td>
                         <td>{customer.doc}</td>
                         <td>{customer.contact}</td>
                         <td>{customer.email}</td>
                         <td>
-                          <Link to={`/clientes/${customer.id}/edit`}>
+                          <Link to={`/clientes/${customer.id}/editar`}>
                             <img src="/images/edit.png" alt="Editar" />
                           </Link>
-                          <Link to={`/clientes/${customer.id}/delete`}>
+                          <button type="button" className="delete-btn" onClick={() => handleDelete(customer.id)}>
                             <img src="/images/delete.png" alt="Excluir" />
-                          </Link>
+                          </button>
                         </td>
                       </tr>
                     ))
@@ -138,14 +156,6 @@ export const Customers: React.FC = (): ReactElement => {
                       </td>
                     </tr>
                   )}
-
-                  {/* id: string;
-                  name: string;
-                  email: string;
-                  contact: string;
-                  doc: string;
-                  disabled: string;
-                  createdAt: string; */}
 
                 </tbody>
               </table>

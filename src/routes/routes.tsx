@@ -7,6 +7,9 @@ import { LoginPage } from '../pages/login';
 import { Loader } from '../components/loader';
 import { DashboardPage } from '../pages/dashboard';
 import { CustomersPage } from '../pages/customers';
+import { NewCustomerPage } from '../pages/new-customer';
+import { EditCustomerPage } from '../pages/edit-customer';
+import { CustomerPage } from '../pages/customer';
 
 interface CustomRouteType extends RouteProps {
   isPrivate: boolean,
@@ -30,9 +33,12 @@ export default function Routes(): ReactElement {
   return (
     <Switch>
       <CustomRoute isPrivate={false} path="/" exact component={() => <Redirect to="/login" />} />
-      <CustomRoute isPrivate={false} exact path="/login" component={LoginPage} />
-      <CustomRoute isPrivate path="/dashboard" component={DashboardPage} />
-      <CustomRoute isPrivate path="/clientes" component={CustomersPage} />
+      <CustomRoute isPrivate={false} path="/login" exact component={LoginPage} />
+      <CustomRoute isPrivate path="/dashboard" exact component={DashboardPage} />
+      <CustomRoute isPrivate path="/clientes" exact component={CustomersPage} />
+      <CustomRoute isPrivate path="/clientes/novo" exact component={NewCustomerPage} />
+      <CustomRoute isPrivate path="/clientes/:id/editar" component={EditCustomerPage} />
+      <CustomRoute isPrivate path="/clientes/:id" component={CustomerPage} />
       {/* <Route path="/login" component={LoginPage} /> 404 - TODO */}
     </Switch>
   );

@@ -1,5 +1,5 @@
 div.value_card {
-  padding: 1rem;
+  padding: 1rem !important;
   flex-grow: 1;
   flex-basis: 0;
 
@@ -38,7 +38,7 @@ div.value_card {
 @media only screen and (min-width: 1367px) {
 
   div.value_card {
-    padding: 2rem;
+    padding: 2rem !important;
   }
 
 }
