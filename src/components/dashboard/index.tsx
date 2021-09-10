@@ -1,7 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { getDashboardChartValues } from '../../api/getDashboardChartValues';
-import { getDashboardJobs } from '../../api/getDashboardJobs';
-import { getDashboardValues } from '../../api/getDashboardValues';
+import { getDashboardChartValues, getDashboardJobs, getDashboardValues } from '../../api/dashboard';
 import { DashboardJobs } from '../../types/dashboard-jobs.type';
 import { DashboardValues } from '../../types/dashboard-values.type';
 import { ValuesChart } from '../chart';

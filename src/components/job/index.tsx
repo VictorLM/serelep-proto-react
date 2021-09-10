@@ -8,27 +8,27 @@ import history from '../../history/history';
 import { Loader } from '../loader';
 import { Footer } from '../template/footer';
 import { TopBar } from '../template/top-bar';
-import { deleteCustomer, getCustomerByID } from '../../api/customer';
-import { Customer } from '../../types/customer.type';
 
 import styles from './styles.module.scss';
+import { FullJob } from '../../types/job.type';
+import { deleteJob, getJobByID } from '../../api/jobs';
 
 type CustomerParams = {
   id: string;
 };
 
-export const SingleCustomer: React.FC = (): ReactElement => {
-  const [customer, setCustomer] = useState<Customer>();
+export const SingleJob: React.FC = (): ReactElement => {
+  const [job, setJob] = useState<FullJob>();
   const [loading, setLoading] = useState(true);
   const { id } = useParams<CustomerParams>();
 
   async function handleDelete(): Promise<void> {
     // eslint-disable-next-line
-    const confirmation = window.confirm('Deseja realmente excluir este Cliente?');
+    const confirmation = window.confirm('Deseja realmente excluir este Job?');
     if (confirmation) {
-      await deleteCustomer(id);
+      await deleteJob(id);
       toast.success('Cliente excluído com sucesso');
-      history.push('/clientes');
+      history.push('/jobs');
     }
   }
 
@@ -37,14 +37,15 @@ export const SingleCustomer: React.FC = (): ReactElement => {
       setLoading(true);
 
       if (!id) return;
-      const foundCustomer = await getCustomerByID(id);
+      const foundJob = await getJobByID(id);
+      console.log(foundJob);
 
-      if (!foundCustomer) {
-        toast.error('Erro ao carregar as informações do Cliente');
+      if (!foundJob) {
+        toast.error('Erro ao carregar as informações do Job');
         setLoading(false);
-        history.push('/clientes');
+        history.push('/jobs');
       } else {
-        setCustomer(foundCustomer);
+        setJob(foundJob);
         setLoading(false);
       }
     })();
@@ -55,8 +56,8 @@ export const SingleCustomer: React.FC = (): ReactElement => {
       <div className="card card-light">
 
         <TopBar
-          title={customer?.name || ''}
-          subtitle="Aqui estão todas as informações deste Cliente"
+          title={job?.name || ''}
+          subtitle="Aqui estão todas as informações deste Job"
           addButton={false}
         />
 
@@ -69,31 +70,31 @@ export const SingleCustomer: React.FC = (): ReactElement => {
                   <tbody>
                     <tr>
                       <td>CPF / CNPJ:</td>
-                      <td className="info">{customer?.doc}</td>
+                      <td className="info">{job?.name}</td>
                     </tr>
                     <tr>
                       <td>Responsável:</td>
-                      <td className="info">{customer?.contact}</td>
+                      <td className="info">{job?.name}</td>
                     </tr>
                     <tr>
                       <td>Email:</td>
-                      <td className="info">{customer?.email}</td>
+                      <td className="info">{job?.name}</td>
                     </tr>
                     <tr>
                       <td>Criado em:</td>
-                      <td className="info">{customer?.createdAt.toLocaleString()}</td>
+                      <td className="info">{job?.createdAt.toLocaleString()}</td>
                     </tr>
                     <tr>
                       <td>ID:</td>
-                      <td className="info">{customer?.id}</td>
+                      <td className="info">{job?.name}</td>
                     </tr>
-                    {customer?.notes && (
+                    {job?.notes && (
                     <>
                       <tr>
                         <td colSpan={2}>Anotações:</td>
                       </tr>
                       <tr>
-                        <td className="info" colSpan={2}>{customer?.notes}</td>
+                        <td className="info" colSpan={2}>{job?.notes}</td>
                       </tr>
                     </>
                     )}
@@ -101,7 +102,7 @@ export const SingleCustomer: React.FC = (): ReactElement => {
                 </table>
 
                 <div className="single-model-actions">
-                  <Link to={`/clientes/${customer?.id}/editar`}>
+                  <Link to={`/jobs/${job?.id}/editar`}>
                     <button className="edit-btn-gr" type="button">
                       <img src="/images/edit.png" alt="Editar" />
                       Editar

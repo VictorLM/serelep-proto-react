@@ -100,7 +100,7 @@ button.btn-black {
 }
 
 input, select, textarea {
-  font-weight: 300;
+  font-weight: 500;
   height: 2.2rem;
   background-color: var(--gray-100);
   border: solid 1px var(--gray-300);
@@ -355,4 +355,22 @@ button.delete-btn-gr {
   &:hover {
     border: solid 2px var(--red);
   }
+}
+
+span.job-type-pill {
+  font-weight: 300;
+  color: var(--white);
+  background-color: var(--gray-500);
+  border-radius: 1rem;
+  margin: 0 .10rem;
+}
+
+span.job-type-pill-sm {
+  font-size: .65rem;
+  padding: .2rem .4rem;
+}
+
+span.job-type-pill-gr {
+  font-size: .9rem;
+  padding: .25rem .5rem;
 }

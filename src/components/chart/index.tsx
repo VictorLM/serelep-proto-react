@@ -102,6 +102,12 @@ export const ValuesChart: React.FC<DashboardChartValues> = ({
           },
         },
       },
+      legend: {
+        display: true,
+        labels: {
+          usePointStyle: true,
+        },
+      },
     },
   };
 

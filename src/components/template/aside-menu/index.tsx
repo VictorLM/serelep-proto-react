@@ -6,8 +6,9 @@ import styles from './styles.module.scss';
 export const AsideMenu: React.FC = (): ReactElement => (
   <aside className={styles.aside}>
     <div>
-
-      <img className={styles.logo} src="/images/logo_white.png" alt="Logo" />
+      <Link to="/dashboard">
+        <img className={styles.logo} src="/images/logo_white.png" alt="Logo" />
+      </Link>
       <nav>
         <Link to="/dashboard">
           <img src="/images/dashboard.png" alt="Dashboard" />

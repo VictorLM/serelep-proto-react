@@ -8,10 +8,9 @@ import history from '../../history/history';
 import { Loader } from '../loader';
 import { Footer } from '../template/footer';
 import { TopBar } from '../template/top-bar';
-import { getCustomerByID } from '../../api/getCustomerByID';
 
 import styles from './styles.module.scss';
-import { updateCustomer } from '../../api/updateCustomer';
+import { getCustomerByID, updateCustomer } from '../../api/customer';
 
 type EditCustomerParams = {
   id: string;

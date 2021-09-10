@@ -3,6 +3,35 @@ import { api } from '../config/axios';
 import { catchBlock } from '../error-handler/catchBlock';
 import { User } from '../types/user.type';
 
+export async function login(
+  email: string,
+  password: string,
+): Promise<boolean> {
+  const body = {
+    email,
+    password,
+  };
+
+  try {
+    await api.post('/auth/login', body, { withCredentials: true });
+    return true;
+  } catch (err: unknown) {
+    catchBlock(err);
+    return false;
+  }
+}
+
+export async function logout(): Promise<boolean> {
+  try {
+    // TODO - Não funciona. Não faço idéia
+    await api.post('/auth/logout', { withCredentials: true });
+    return true;
+  } catch (err: unknown) {
+    catchBlock(err);
+    return false;
+  }
+}
+
 export async function getUser(): Promise<User | undefined> {
   try {
     const { data } = await api.get('/users/get-user', { withCredentials: true });

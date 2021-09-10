@@ -3,40 +3,49 @@ import React, {
 } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { deleteCustomer, getCustomers } from '../../api/customer';
-import { Customer } from '../../types/customer.type';
+import { deleteJob, getJobs } from '../../api/jobs';
 import { BasicFilters } from '../../types/filters.type';
+import { Job, JobStatus, JobTypes } from '../../types/job.type';
 import { Loader } from '../loader';
 import { Footer } from '../template/footer';
 import { TopBar } from '../template/top-bar';
 
-export const Customers: React.FC = (): ReactElement => {
-  const [customers, setCustomers] = useState<Customer[]>();
+type JobsSelectFilters = BasicFilters & {
+  status: JobStatus | 'ALL';
+  types: JobTypes | 'ALL'; // TODO
+}
+
+export const Jobs: React.FC = (): ReactElement => {
+  const [jobs, setJobs] = useState<Job[]>();
   const [loading, setLoading] = useState(true);
   // Filters
   const [searchFilter, setSearchFilter] = useState('');
-  const [filters, setFilters] = useState<BasicFilters>({
+  const [filters, setFilters] = useState<JobsSelectFilters>({
     search: '',
-    orderBy: 'ASC',
+    orderBy: 'DESC',
+    status: 'ALL',
+    types: 'ALL',
   });
 
   function cleanFilters(): void {
     setSearchFilter('');
     setFilters({
       search: '',
-      orderBy: 'ASC',
+      orderBy: 'DESC',
+      status: 'ALL',
+      types: 'ALL',
     });
   }
 
   async function getInitialProps(): Promise<void> {
     setLoading(true);
     cleanFilters();
-    const foundCustomers = await getCustomers({});
-    setCustomers(foundCustomers);
+    const foundJobs = await getJobs({});
+    setJobs(foundJobs);
     setLoading(false);
   }
 
-  async function getCustomersWithFilters(): Promise<void> {
+  async function getJobsWithFilters(): Promise<void> {
     // VALIDANDO FORM
     if (filters.search) {
       if (filters.search.length < 1 || filters.search.length > 50) {
@@ -50,22 +59,27 @@ export const Customers: React.FC = (): ReactElement => {
       return;
     }
 
+    if (filters.status !== 'OPEN' && filters.status !== 'DONE' && filters.status !== 'ALL') {
+      toast.error('Status inválido');
+      return;
+    }
+
     const query = {
       ...filters,
       search: searchFilter,
     };
 
     setLoading(true);
-    const foundCustomers = await getCustomers(query);
-    setCustomers(foundCustomers);
+    const foundJobs = await getJobs(query);
+    setJobs(foundJobs);
     setLoading(false);
   }
 
   async function handleDelete(id: string): Promise<void> {
     // eslint-disable-next-line
-    const confirmation = window.confirm('Deseja realmente excluir este Cliente?');
+    const confirmation = window.confirm('Deseja realmente excluir este Job?');
     if (confirmation) {
-      await deleteCustomer(id);
+      await deleteJob(id);
       toast.success('Cliente excluído com sucesso');
       await getInitialProps();
     }
@@ -80,6 +94,23 @@ export const Customers: React.FC = (): ReactElement => {
     );
   }
 
+  function setTypePill(type: string): JSX.Element {
+    switch (type) {
+      case 'VISUAL_IDENTITY':
+        return <span key={type} className="job-type-pill job-type-pill-sm">IDV</span>;
+      case 'BRAND_DESIGN':
+        return <span key={type} className="job-type-pill job-type-pill-sm">Marca</span>;
+      case 'PACKAGING_DESIGN':
+        return <span key={type} className="job-type-pill job-type-pill-sm">Embalagem</span>;
+      case 'NAMING':
+        return <span key={type} className="job-type-pill job-type-pill-sm">Naming</span>;
+      case 'OTHERS':
+        return <span key={type} className="job-type-pill job-type-pill-sm">Outros</span>;
+      default:
+        return <span key={type} className="job-type-pill job-type-pill-sm" />;
+    }
+  }
+
   useEffect(() => {
     (async () => {
       await getInitialProps();
@@ -89,7 +120,7 @@ export const Customers: React.FC = (): ReactElement => {
 
   useEffect(() => {
     (async () => {
-      await getCustomersWithFilters();
+      await getJobsWithFilters();
     })();
     // eslint-disable-next-line
   }, [filters]);
@@ -99,8 +130,8 @@ export const Customers: React.FC = (): ReactElement => {
       <div className="card card-light">
 
         <TopBar
-          title="Clientes"
-          subtitle="Aqui estão todos os seus clientes cadastrados"
+          title="Jobs"
+          subtitle="Aqui estão todos os seus jobs cadastrados"
           addButton
         />
 
@@ -116,15 +147,26 @@ export const Customers: React.FC = (): ReactElement => {
                   onChange={(e) => handleSetFilters('orderBy', e.target.value)}
                 >
                   <option disabled>Ordenar</option>
-                  <option value="ASC">Nome A-Z</option>
-                  <option value="DESC">Nome Z-A</option>
+                  <option value="DESC">Mais novos</option>
+                  <option value="ASC">Mais antigos</option>
                 </select>
 
+                <select
+                  name="status"
+                  value={filters.status}
+                  onChange={(e) => handleSetFilters('status', e.target.value)}
+                >
+                  <option disabled>Status</option>
+                  <option value="ALL">Todos</option>
+                  <option value="OPEN">Abertos</option>
+                  <option value="DONE">Concluídos</option>
+                </select>
                 <form>
                   <input
                     type="text"
+                    id="search"
                     name="search"
-                    placeholder="Nome do Cliente"
+                    placeholder="Nome do Job"
                     value={searchFilter}
                     onChange={(e) => setSearchFilter(e.target.value)}
                   />
@@ -142,32 +184,46 @@ export const Customers: React.FC = (): ReactElement => {
                 <thead>
                   <tr>
                     <th>Nome</th>
-                    <th>CPF ou CNPJ</th>
-                    <th>Responsável</th>
-                    <th>Email</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                    <th>Cliente</th>
+                    <th>Preço (R$)</th>
+                    <th>Criado em</th>
                     <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
 
-                  {customers && customers?.length > 0 ? (
+                  {jobs && jobs?.length > 0 ? (
 
-                    customers?.map((customer) => (
+                    jobs?.map((job) => (
 
-                      <tr key={customer.id}>
+                      <tr key={job.id}>
                         <td className="link-view">
-                          <Link to={`/clientes/${customer.id}`}>
-                            {customer.name}
+                          <Link to={`/jobs/${job.id}`}>
+                            {job.name}
                           </Link>
                         </td>
-                        <td>{customer.doc}</td>
-                        <td>{customer.contact}</td>
-                        <td>{customer.email}</td>
                         <td>
-                          <Link to={`/clientes/${customer.id}/editar`}>
+                          {job.types.map((type) => (
+                            setTypePill(type)
+                          ))}
+                        </td>
+                        <td>
+                          {job.status === 'DONE' ? (
+                            <span className="green">&#11044;</span>
+                          ) : (
+                            <span className="yellow">&#11044;</span>
+                          )}
+                        </td>
+                        <td>{job.customer}</td>
+                        <td>{`${job.price.toFixed(2).replace('.', ',')}`}</td>
+                        <td>{job.createdAt.toLocaleString('pt-BR', { dateStyle: 'short' })}</td>
+                        <td>
+                          <Link to={`/jobs/${job.id}/editar`}>
                             <img src="/images/edit.png" alt="Editar" />
                           </Link>
-                          <button type="button" className="delete-btn" onClick={() => handleDelete(customer.id)}>
+                          <button type="button" className="delete-btn" onClick={() => handleDelete(job.id)}>
                             <img src="/images/delete.png" alt="Excluir" />
                           </button>
                         </td>
@@ -176,7 +232,7 @@ export const Customers: React.FC = (): ReactElement => {
                   ) : (
                     <tr className="not-found-results">
                       <td colSpan={5}>
-                        <h2>Nenhum cliente encontrado</h2>
+                        <h2>Nenhum job encontrado</h2>
                       </td>
                     </tr>
                   )}

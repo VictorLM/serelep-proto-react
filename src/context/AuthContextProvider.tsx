@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import history from '../history/history';
 import { AuthContextInterface } from './AuthContext';
-import { login } from '../api/login';
-import { getUser } from '../api/getUser';
+import { getUser, login, logout } from '../api/auth';
 import { User } from '../types/user.type';
-import { logout } from '../api/logout';
 
 export default function AuthContextProvider(): AuthContextInterface {
   const [user, setUser] = useState<User>();

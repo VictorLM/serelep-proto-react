@@ -4,7 +4,7 @@ import React, {
 import { toast } from 'react-toastify';
 import isEmail from 'validator/lib/isEmail';
 import history from '../../history/history';
-import { createCustomer } from '../../api/createCustomer';
+import { createCustomer } from '../../api/customer';
 import { Loader } from '../loader';
 import { Footer } from '../template/footer';
 import { TopBar } from '../template/top-bar';
