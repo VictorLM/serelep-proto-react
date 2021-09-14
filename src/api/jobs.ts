@@ -55,13 +55,13 @@ export async function getJobByID(id: string): Promise<FullJob | undefined> {
     });
 
     const customer: Customer = {
-      id: get(data, 'customer._id', ''),
-      name: get(data, 'customer.name', ''),
-      email: get(data, 'customer.email', ''),
-      contact: get(data, 'customer.contact', ''),
-      doc: get(data, 'customer.doc', ''),
-      notes: get(data, 'customer.notes', null),
-      createdAt: new Date(get(data, 'customer.createdAt', Date.now())),
+      id: get(data, 'job.customer._id', ''),
+      name: get(data, 'job.customer.name', ''),
+      email: get(data, 'job.customer.email', ''),
+      contact: get(data, 'job.customer.contact', ''),
+      doc: get(data, 'job.customer.doc', ''),
+      notes: get(data, 'job.customer.notes', null),
+      createdAt: new Date(get(data, 'job.customer.createdAt', Date.now())),
     };
 
     const payments: Payment[] = [];

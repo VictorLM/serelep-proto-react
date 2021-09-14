@@ -8,23 +8,23 @@ export default function AuthContextProvider(): AuthContextInterface {
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    (async () => {
-      if (history.location.pathname === '/login') return;
+  async function handleGetUser(): Promise<void> {
+    setLoading(true);
+    if (!user) {
       const foundUser = await getUser();
       if (foundUser) {
         setUser(foundUser);
       }
-      setLoading(false);
-    })();
-  }, []);
+    }
+    setLoading(false);
+  }
 
   async function handleLogin(
     email: string,
     password: string,
   ): Promise<void> {
     if (await login(email, password)) {
-      setLoading(false);
+      await handleGetUser();
       history.push('/dashboard');
     }
   }
@@ -32,10 +32,19 @@ export default function AuthContextProvider(): AuthContextInterface {
   async function handleLogout(): Promise<void> {
     if (await logout()) {
       setUser(undefined);
-      setLoading(false);
       history.push('/login');
     }
   }
+
+  useEffect(() => {
+    (async () => {
+      if (history.location.pathname === '/login') {
+        setLoading(false);
+        return;
+      }
+      await handleGetUser();
+    })();
+  });
 
   return {
     user, loading, handleLogin, handleLogout,

@@ -1,0 +1,44 @@
+div.value_card {
+  padding: 1rem !important;
+  flex-grow: 1;
+  flex-basis: 0;
+
+  div.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    img {
+      max-height: 3em;
+      max-width: 3em;
+      background-color: var(--black);
+      padding: .8rem;
+      border-radius: 1rem;
+    }
+  }
+
+  p.title {
+    color: var(--gray-300);
+    font-size: .9rem;
+    margin: .5rem 0;
+  }
+
+  p.value {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  p.value_negative {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--red);
+  }
+}
+
+@media only screen and (min-width: 1367px) {
+
+  div.value_card {
+    padding: 2rem !important;
+  }
+
+}

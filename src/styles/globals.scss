@@ -304,6 +304,9 @@ table.model-list {
       &:hover {
         color: var(--gray-300);
       }
+      &:visited {
+        color: inherit;
+      }
     }
   }
   th {
@@ -319,6 +322,19 @@ table.single-model-list {
   }
   td.info {
     font-weight: 300;
+  }
+  td.link-view {
+    a {
+      color: var(--gray-500);
+      font-weight: 300;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        color: var(--gray-300) !important;
+      }
+      &:visited {
+        color: inherit;
+      }
+    }
   }
 }
 div.single-model-actions {
@@ -371,6 +387,6 @@ span.job-type-pill-sm {
 }
 
 span.job-type-pill-gr {
-  font-size: .9rem;
+  font-size: .8rem;
   padding: .25rem .5rem;
 }
