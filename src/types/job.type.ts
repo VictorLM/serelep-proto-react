@@ -9,11 +9,21 @@ export type BaseJob = {
   customer: string;
   price: number;
   description: string | null;
-  notes: string[] | never[];
+  notes: JobNote[] | [];
 }
 
 export type Job = BaseJob & {
   id: string;
+  createdAt: Date;
+}
+
+export type ApiJobNote = {
+  note: string;
+  createdAt: string;
+}
+
+export type JobNote = {
+  note: string;
   createdAt: Date;
 }
 
@@ -26,7 +36,7 @@ export type FullJob = {
   payments: Payment[];
   bills: Bill[],
   description: string | null;
-  notes: string[] | never[];
+  notes: JobNote[] | [];
   createdAt: Date;
 }
 
@@ -38,7 +48,7 @@ export type ApiJob = {
   customer: CustomerApi;
   payments: ApiPaymentRelatedToJob[];
   description: string | null;
-  notes: string[] | never[];
+  notes: ApiJobNote[] | [];
   createdAt: string;
 }
 

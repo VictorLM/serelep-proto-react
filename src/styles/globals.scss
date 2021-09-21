@@ -107,7 +107,7 @@ input, select, textarea {
   border-radius: .5rem;
   padding: .5rem;
   &::placeholder {
-    //
+    font-weight: 300;
   }
 }
 
@@ -252,7 +252,7 @@ span.date {
 tr.not-found-results {
   td {
     border-bottom: none !important;
-    h2 {
+    h2, h3 {
       text-align: center;
       margin: 1rem;
       font-weight: 300;
@@ -389,4 +389,26 @@ span.job-type-pill-sm {
 span.job-type-pill-gr {
   font-size: .8rem;
   padding: .25rem .5rem;
+}
+
+table.job-values-list {
+  width: 100%;
+  text-align: center;
+  margin-top: .5rem;
+
+  td, th {
+    font-size: .9rem;
+    padding: .5rem 0;
+    font-weight: 300;
+    text-align: left;
+    color: var(--gray-500);
+    border-bottom: solid 1px var(--gray-300);
+    &:last-of-type {
+      text-align: center;
+    }
+  }
+  th {
+    font-size: .95rem;
+    font-weight: 500;
+  }
 }

@@ -5,7 +5,7 @@ div.main_card {
     margin-top: 2rem;
   }
 
-  div.info_card {
+  div.info_card, div.payments_bills_card {
     flex-grow: 1;
     flex-basis: 0;
   }
@@ -18,7 +18,60 @@ div.main_card {
       display: flex;
       gap: 1rem;
       margin-bottom: 1rem;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
     }
+  }
+
+  div.note_card {
+    font-size: .95rem;
+    padding: .8rem;
+    color: var(--gray-500);
+    font-weight: 300;
+    margin: 1rem 0;
+    border-bottom-right-radius: 0;
+    small {
+      font-style: italic;
+      color: var(--gray-300);
+      font-weight: 300;
+    }
+  }
+
+  p.not_found {
+    color: var(--gray-300);
+    font-weight: 300;
+    padding: 1rem 0;
+    text-align: center;
+  }
+
+  form.notes_form {
+    border: solid 1px var(--gray-300);
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    textarea {
+      width: 100%;
+      border: none;
+      resize: none;
+      height: 3rem;
+      background: var(--white);
+    }
+    button {
+      padding: .5rem;
+      border: none;
+      background: none;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  div.payments_bills_card {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
 }

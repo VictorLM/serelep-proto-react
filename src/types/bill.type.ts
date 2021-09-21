@@ -8,7 +8,7 @@ export type BaseBill = {
   job?: string;
   name: string;
   type: string;
-  subtype: string;
+  subType: string;
 }
 
 export type Bill = BaseBill & {
@@ -25,6 +25,6 @@ export type ApiBill = {
   job: ApiJob;
   name: string;
   type: string;
-  subtype: string;
+  subType: string;
   createdAt: string;
 }

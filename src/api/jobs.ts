@@ -3,7 +3,9 @@ import { api } from '../config/axios';
 import { catchBlock } from '../error-handler/catchBlock';
 import { ApiBill, Bill } from '../types/bill.type';
 import { Customer } from '../types/customer.type';
-import { ApiJob, FullJob, Job } from '../types/job.type';
+import {
+  ApiJob, ApiJobNote, FullJob, Job, JobNote,
+} from '../types/job.type';
 import { ApiPayment, Payment } from '../types/payment.type';
 
 type GetJobsProps = {
@@ -36,7 +38,7 @@ export async function getJobs(
         customer: get(job, 'customer.name', ''),
         price: sumBy(job.payments, 'value'),
         description: get(job, 'description', ''),
-        notes: get(job, 'notes', []),
+        notes: [],
         createdAt: new Date(get(job, 'createdAt', Date.now())),
       });
     });
@@ -88,8 +90,17 @@ export async function getJobByID(id: string): Promise<FullJob | undefined> {
         value: get(bill, 'value', 0),
         name: get(bill, 'name', ''),
         type: get(bill, 'type', ''),
-        subtype: get(bill, 'subtype', ''),
+        subType: get(bill, 'subType', ''),
         createdAt: new Date(get(bill, 'createdAt', Date.now())),
+      });
+    });
+
+    const notes: JobNote[] = [];
+
+    data?.job.notes.forEach((note: ApiJobNote) => {
+      notes.push({
+        note: get(note, 'note', ''),
+        createdAt: new Date(get(note, 'createdAt', Date.now())),
       });
     });
 
@@ -102,7 +113,7 @@ export async function getJobByID(id: string): Promise<FullJob | undefined> {
       payments,
       bills,
       description: get(data, 'job.description', ''),
-      notes: get(data, 'job.notes', []),
+      notes,
       createdAt: new Date(get(data, 'job.createdAt', Date.now())),
     };
 
@@ -110,6 +121,21 @@ export async function getJobByID(id: string): Promise<FullJob | undefined> {
   } catch (err: unknown) {
     catchBlock(err);
     return undefined;
+  }
+}
+
+export async function createJobNote(
+  jobId: string,
+  note: string,
+): Promise<boolean> {
+  try {
+    await api.post(`/jobs/${jobId}/notes`, { note }, {
+      withCredentials: true,
+    });
+    return true;
+  } catch (err: unknown) {
+    catchBlock(err);
+    return false;
   }
 }
 
