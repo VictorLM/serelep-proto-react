@@ -1,6 +1,6 @@
 import { Bill } from './bill.type';
 import { Customer, CustomerApi } from './customer.type';
-import { ApiPaymentRelatedToJob, Payment } from './payment.type';
+import { ApiPaymentRelatedToJob, NewPayment, Payment } from './payment.type';
 
 export type BaseJob = {
   name: string;
@@ -50,6 +50,18 @@ export type ApiJob = {
   description: string | null;
   notes: ApiJobNote[] | [];
   createdAt: string;
+}
+
+export type NewJob = {
+  name: string;
+  types: string[];
+  customer: string;
+  payments: NewPayment[];
+  description?: string;
+}
+
+export type UpdateJob = NewJob & {
+  status: string;
 }
 
 export enum JobTypes {

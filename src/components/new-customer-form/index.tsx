@@ -10,6 +10,7 @@ import { Footer } from '../template/footer';
 import { TopBar } from '../template/top-bar';
 
 import styles from './styles.module.scss';
+import { BaseCustomer } from '../../types/customer.type';
 
 export const NewCustomerForm: React.FC = (): ReactElement => {
   const [name, setName] = useState('');
@@ -62,7 +63,7 @@ export const NewCustomerForm: React.FC = (): ReactElement => {
 
     if (!formErrors) {
       setLoading(true);
-      const newCustomer = {
+      const newCustomer: BaseCustomer = {
         name, doc, email, contact, notes,
       };
       const result = await createCustomer(newCustomer);

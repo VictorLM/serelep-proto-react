@@ -177,7 +177,7 @@ form.form-inline {
 
 }
 
-button.create-btn {
+button.create-btn, button.clean-btn {
   width: fit-content;
   height: 2rem;
   border-radius: .5rem;
@@ -187,6 +187,13 @@ button.create-btn {
   padding: .25rem 1rem;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+  &:hover {
+    background-color: var(--gray-500);
+  }
+}
+
+button.clean-btn {
+  background-color: var(--gray-300);
   &:hover {
     background-color: var(--gray-500);
   }
@@ -410,5 +417,92 @@ table.job-values-list {
   th {
     font-size: .95rem;
     font-weight: 500;
+  }
+}
+
+select.multi-select {
+  height: fit-content;
+  background: var(--white);
+  option {
+    height: 1.5rem;
+  }
+}
+
+small.small-form {
+  font-weight: 300;
+  font-size: .8rem;
+  color: var(--gray-300);
+}
+
+div.two-col-form {
+  display: flex;
+  gap: 2rem;
+}
+
+p.payment-form-title {
+  margin-bottom: 1rem;
+}
+
+div.parcelas {
+  div.flex {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    label {
+      font-size: .9rem;
+      font-weight: 300;
+      gap: .5rem;
+      margin-bottom: .5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    button {
+      font-size: .7rem;
+      height: 2rem;
+      margin-bottom: .65rem;
+      border-radius: .5rem;
+      padding: .5rem;
+      border: none;
+      background: var(--gray-500);
+      color: var(--white);
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        background: var(--green);
+      }
+    }
+  }
+
+}
+
+div.bottom {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  div.value {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--gray-500);
+    color: var(--white);
+    border-radius: .5rem;
+    padding: .8rem;
+    font-weight: 300;
+    img {
+      vertical-align: middle;
+      max-height: 2rem;
+      max-width: 2rem;
+    }
+    i {
+      font-weight: 300;
+      font-size: .7rem;
+      font-style: normal;
+      display: block;
+    }
+  }
+  button {
+    font-size: 1.05rem;
+    // padding: .5rem 1rem;
+    height: 3.5rem;
   }
 }

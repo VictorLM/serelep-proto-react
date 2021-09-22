@@ -31,3 +31,8 @@ export type ApiPaymentRelatedToJob = {
   value: number;
   createdAt: string;
 }
+
+export type NewPayment = {
+  dueDate: string;
+  value: number;
+}

@@ -4,7 +4,7 @@ import { catchBlock } from '../error-handler/catchBlock';
 import { ApiBill, Bill } from '../types/bill.type';
 import { Customer } from '../types/customer.type';
 import {
-  ApiJob, ApiJobNote, FullJob, Job, JobNote,
+  ApiJob, ApiJobNote, FullJob, Job, JobNote, NewJob, UpdateJob,
 } from '../types/job.type';
 import { ApiPayment, Payment } from '../types/payment.type';
 
@@ -139,34 +139,34 @@ export async function createJobNote(
   }
 }
 
-// export async function createCustomer(
-//   customer: BaseCustomer,
-// ): Promise<boolean> {
-//   try {
-//     await api.post('/customers', customer, {
-//       withCredentials: true,
-//     });
-//     return true;
-//   } catch (err: unknown) {
-//     catchBlock(err);
-//     return false;
-//   }
-// }
+export async function createJob(
+  job: NewJob,
+): Promise<boolean> {
+  try {
+    await api.post('/jobs', job, {
+      withCredentials: true,
+    });
+    return true;
+  } catch (err: unknown) {
+    catchBlock(err);
+    return false;
+  }
+}
 
-// export async function updateCustomer(
-//   id: string,
-//   updatedCustomer: BaseCustomer,
-// ): Promise<boolean> {
-//   try {
-//     await api.patch(`/customers/${id}`, updatedCustomer, {
-//       withCredentials: true,
-//     });
-//     return true;
-//   } catch (err: unknown) {
-//     catchBlock(err);
-//     return false;
-//   }
-// }
+export async function updateJob(
+  id: string,
+  updatedJob: UpdateJob,
+): Promise<boolean> {
+  try {
+    await api.patch(`/jobs/${id}`, updatedJob, {
+      withCredentials: true,
+    });
+    return true;
+  } catch (err: unknown) {
+    catchBlock(err);
+    return false;
+  }
+}
 
 export async function deleteJob(
   id: string,
