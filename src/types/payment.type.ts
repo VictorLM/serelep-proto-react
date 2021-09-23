@@ -1,11 +1,11 @@
-import { ApiJob } from './job.type';
+import { ApiJob, Job } from './job.type';
 
 export type BasePayment = {
-  notes?: string[] | [];
+  notes?: string | null;
   payed: Date | null;
   dueDate: Date;
   value: number;
-  job?: ApiJob;
+  job?: Job;
 }
 
 export type Payment = BasePayment & {
@@ -15,7 +15,7 @@ export type Payment = BasePayment & {
 
 export type ApiPayment = {
   _id: string;
-  notes: string[] | [];
+  notes: string | null;
   payed: string | null;
   dueDate: string;
   value: number;
@@ -25,7 +25,7 @@ export type ApiPayment = {
 
 export type ApiPaymentRelatedToJob = {
   _id: string;
-  notes: string[] | [];
+  notes: string | null;
   payed: string | null;
   dueDate: string;
   value: number;
@@ -33,6 +33,13 @@ export type ApiPaymentRelatedToJob = {
 }
 
 export type NewPayment = {
+  dueDate: string;
+  value: number;
+}
+
+export type UpdatePayment = {
+  notes?: string | null;
+  payed?: string;
   dueDate: string;
   value: number;
 }

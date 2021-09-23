@@ -71,7 +71,7 @@ export async function getJobByID(id: string): Promise<FullJob | undefined> {
     data?.job.payments.forEach((payment: ApiPayment) => {
       payments.push({
         id: get(payment, '_id', ''),
-        notes: get(payment, 'notes', []),
+        notes: get(payment, 'notes', null),
         payed: payment.payed ? new Date(payment.payed) : null,
         dueDate: new Date(get(payment, 'dueDate', Date.now())),
         value: get(payment, 'value', 0),

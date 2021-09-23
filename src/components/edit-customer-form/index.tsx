@@ -120,44 +120,59 @@ export const EditCustomerForm: React.FC = (): ReactElement => {
 
               <form className="form-inline" onSubmit={(e) => handleUpdateCustomer(e)}>
 
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Nome"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+                <label htmlFor="name">
+                  <span>Nome</span>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Nome"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </label>
 
-                <input
-                  type="text"
-                  name="doc"
-                  placeholder="CPF ou CNPJ"
-                  value={doc}
-                  onChange={(e) => setDoc(e.target.value)}
-                />
+                <label htmlFor="doc">
+                  <span>CPF ou CNPJ</span>
+                  <input
+                    type="text"
+                    name="doc"
+                    placeholder="CPF ou CNPJ"
+                    value={doc}
+                    onChange={(e) => setDoc(e.target.value)}
+                  />
+                </label>
 
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <label htmlFor="email">
+                  <span>Email</span>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </label>
 
-                <input
-                  type="text"
-                  name="contact"
-                  placeholder="Responsável"
-                  value={contact}
-                  onChange={(e) => setContact(e.target.value)}
-                />
+                <label htmlFor="contact">
+                  <span>Responsável</span>
+                  <input
+                    type="text"
+                    name="contact"
+                    placeholder="Responsável"
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                  />
+                </label>
 
-                <textarea
-                  name="notes"
-                  placeholder="Anotações"
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                />
+                <label htmlFor="notes">
+                  <span>Anotações</span>
+                  <textarea
+                    name="notes"
+                    placeholder="Anotações"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                  />
+                </label>
 
                 <button type="submit" className="create-btn">
                   Editar Cliente

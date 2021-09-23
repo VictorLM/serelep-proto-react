@@ -60,8 +60,12 @@ export type NewJob = {
   description?: string;
 }
 
-export type UpdateJob = NewJob & {
+export type UpdateJob = {
   status: string;
+  name: string;
+  types: string[];
+  customer: string;
+  description?: string;
 }
 
 export enum JobTypes {

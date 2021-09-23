@@ -153,7 +153,7 @@ export const NewJobForm: React.FC = (): ReactElement => {
               <input
                 type="text"
                 name="name"
-                placeholder="Nome"
+                placeholder="Nome do Job"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -179,8 +179,8 @@ export const NewJobForm: React.FC = (): ReactElement => {
                 name="types"
                 multiple
                 value={types}
-                  // eslint-disable-next-line
-                  onChange={(e) => setTypes(Array.from(e.target.selectedOptions, (option) => option.value))}
+                // eslint-disable-next-line
+                onChange={(e) => setTypes(Array.from(e.target.selectedOptions, (option) => option.value))}
               >
                 <option value="" disabled>Tipos</option>
                 <option value="VISUAL_IDENTITY">Identidade Visual</option>
