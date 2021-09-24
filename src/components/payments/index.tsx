@@ -188,7 +188,7 @@ export const Payments: React.FC = (): ReactElement => {
                         </td>
                         <td>{payment.job}</td>
                         <td>{`${payment.value.toFixed(2).replace('.', ',')}`}</td>
-                        <td>{payment.dueDate.toLocaleString('pt-BR', { dateStyle: 'short' })}</td>
+                        <td>{payment.dueDate.toLocaleString('pt-BR', { timeZone: 'Europe/London', dateStyle: 'short' })}</td>
                         <td>
                           {payment.payed ? (
                             <span className="green">&#11044;</span>

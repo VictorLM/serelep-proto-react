@@ -76,7 +76,7 @@ export const EditCustomerForm: React.FC = (): ReactElement => {
       if (result) {
         toast.success('Cliente editado com sucesso');
         cleanForm();
-        history.push('/clientes');
+        history.push(`/clientes/${id}`);
       }
     }
   }

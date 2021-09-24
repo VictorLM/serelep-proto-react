@@ -84,7 +84,7 @@ export async function getJobByID(id: string): Promise<FullJob | undefined> {
     data?.bills.forEach((bill: ApiBill) => {
       bills.push({
         id: get(bill, '_id', ''),
-        notes: get(bill, 'notes', []),
+        notes: get(bill, 'notes', ''),
         payed: bill.payed ? new Date(bill.payed) : null,
         dueDate: bill.dueDate ? new Date(bill.dueDate) : null,
         value: get(bill, 'value', 0),

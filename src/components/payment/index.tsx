@@ -77,11 +77,11 @@ export const SinglePayment: React.FC = (): ReactElement => {
                     </tr>
                     <tr>
                       <td>Valor:</td>
-                      <td className="info">{`${payment?.value.toFixed(2).replace('.', ',')}`}</td>
+                      <td className="info">{`R$ ${payment?.value.toFixed(2).replace('.', ',')}`}</td>
                     </tr>
                     <tr>
                       <td>Vencimento:</td>
-                      <td className="info">{payment?.dueDate.toLocaleString('pt-BR', { dateStyle: 'short' })}</td>
+                      <td className="info">{payment?.dueDate.toLocaleString('pt-BR', { timeZone: 'Europe/London', dateStyle: 'short' })}</td>
                     </tr>
                     <tr>
                       <td>Status:</td>

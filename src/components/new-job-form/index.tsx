@@ -150,53 +150,65 @@ export const NewJobForm: React.FC = (): ReactElement => {
 
             <form className="form-inline">
 
-              <input
-                type="text"
-                name="name"
-                placeholder="Nome do Job"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+              <label htmlFor="name">
+                <span>Nome do Job</span>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Nome do Job"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </label>
 
-              <select
-                name="customer"
-                value={customer}
-                onChange={(e) => setCustomer(e.target.value)}
-              >
-                <option value="" disabled>Selecione o Cliente</option>
+              <label htmlFor="customer">
+                <span>Cliente</span>
+                <select
+                  name="customer"
+                  value={customer}
+                  onChange={(e) => setCustomer(e.target.value)}
+                >
+                  <option value="" disabled>Selecione o Cliente</option>
 
-                {customers && customers?.length > 0 ? (
+                  {customers && customers?.length > 0 ? (
 
-                  customers?.map((c) => (
-                    <option key={c.id} value={c.id}>{c.name}</option>
-                  ))
-                ) : <></>}
+                    customers?.map((c) => (
+                      <option key={c.id} value={c.id}>{c.name}</option>
+                    ))
+                  ) : <></>}
 
-              </select>
+                </select>
+              </label>
 
-              <select
-                className="multi-select"
-                name="types"
-                multiple
-                value={types}
+              <label htmlFor="types">
+                <span>Tipos</span>
+                <select
+                  className="multi-select"
+                  name="types"
+                  multiple
+                  value={types}
                 // eslint-disable-next-line
                 onChange={(e) => setTypes(Array.from(e.target.selectedOptions, (option) => option.value))}
-              >
-                <option value="" disabled>Tipos</option>
-                <option value="VISUAL_IDENTITY">Identidade Visual</option>
-                <option value="BRAND_DESIGN">Design de Marca</option>
-                <option value="PACKAGING_DESIGN">Design de Embalagem</option>
-                <option value="NAMING">Naming</option>
-                <option value="OTHERS">Outros</option>
-              </select>
+                >
+                  <option value="" disabled>Tipos</option>
+                  <option value="VISUAL_IDENTITY">Identidade Visual</option>
+                  <option value="BRAND_DESIGN">Design de Marca</option>
+                  <option value="PACKAGING_DESIGN">Design de Embalagem</option>
+                  <option value="NAMING">Naming</option>
+                  <option value="OTHERS">Outros</option>
+                </select>
+              </label>
               <small className="small-form">* Segura CTRL para selecionar mais de um Tipo</small>
 
-              <textarea
-                name="description"
-                placeholder="Descrição"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
+              <label htmlFor="description">
+                <span>Descrição</span>
+                <textarea
+                  name="description"
+                  placeholder="Descrição"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </label>
 
             </form>
 
@@ -249,8 +261,7 @@ export const NewJobForm: React.FC = (): ReactElement => {
 
                       <tr key={payment.dueDate}>
                         <td>{`Parcela ${index + 1}`}</td>
-                        {/* // TODO - Mostrando as vezes um dia a menos por conta do timezone */}
-                        <td>{new Date(payment.dueDate).toLocaleString('pt-BR', { dateStyle: 'short' })}</td>
+                        <td>{new Date(payment.dueDate).toLocaleString('pt-BR', { timeZone: 'Europe/London', dateStyle: 'short' })}</td>
                         <td>{`R$ ${payment.value.toFixed(2).replace('.', ',')}`}</td>
                       </tr>
 

@@ -73,7 +73,7 @@ export const EditPaymentForm: React.FC = (): ReactElement => {
       if (result) {
         toast.success('Pagamento editado com sucesso');
         cleanForm();
-        history.push('/pagamentos');
+        history.push(`/pagamentos/${id}`);
       }
     }
   }

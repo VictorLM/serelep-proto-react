@@ -28,7 +28,7 @@ export const ValuesChart: React.FC<DashboardChartValues> = ({
   chartValues?.forEach((montlyValues) => {
     // Labels
     const date = new Date(montlyValues.year, montlyValues.month - 1);
-    const monthString = date.toLocaleString('pt-BR', { month: 'short' });
+    const monthString = date.toLocaleString('pt-BR', { timeZone: 'Europe/London', month: 'short' });
     labels.push(`${monthString} / ${String(montlyValues.year).substr(2)}`);
     // Values
     payments.push(montlyValues.expectedPaymentsAmount);

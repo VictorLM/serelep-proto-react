@@ -260,6 +260,10 @@ span.green {
   color: var(--green);
 }
 
+span.gray {
+  color: var(--gray-300);
+}
+
 span.date {
   font-weight: 300;
   font-size: .8rem;
@@ -336,9 +340,14 @@ table.single-model-list {
   td {
     font-weight: 500;
   }
+}
+
+table {
+
   td.info {
     font-weight: 300;
   }
+
   td.link-view {
     a {
       color: var(--gray-500);
@@ -352,7 +361,9 @@ table.single-model-list {
       }
     }
   }
+
 }
+
 div.single-model-actions {
   display: flex;
   // flex-direction: column;

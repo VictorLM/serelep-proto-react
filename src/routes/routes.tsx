@@ -14,9 +14,13 @@ import { JobsPage } from '../pages/jobs';
 import { JobPage } from '../pages/job';
 import { NewJobPage } from '../pages/new-job';
 import { EditJobPage } from '../pages/edit-job';
-import { PaymentsPage } from '../pages/pagamentos';
+import { PaymentsPage } from '../pages/payments';
 import { PaymentPage } from '../pages/payment';
 import { EditPaymentPage } from '../pages/edit-payment';
+import { BillsPage } from '../pages/bills';
+import { BillPage } from '../pages/bill';
+import { NewBillPage } from '../pages/new-bill';
+import { EditBillPage } from '../pages/edit-bill';
 
 interface CustomRouteType extends RouteProps {
   isPrivate: boolean,
@@ -53,6 +57,10 @@ export default function Routes(): ReactElement {
       <CustomRoute isPrivate path="/pagamentos" exact component={PaymentsPage} />
       <CustomRoute isPrivate path="/pagamentos/:id/editar" component={EditPaymentPage} />
       <CustomRoute isPrivate path="/pagamentos/:id" component={PaymentPage} />
+      <CustomRoute isPrivate path="/despesas" exact component={BillsPage} />
+      <CustomRoute isPrivate path="/despesas/novo" exact component={NewBillPage} />
+      <CustomRoute isPrivate path="/despesas/:id/editar" component={EditBillPage} />
+      <CustomRoute isPrivate path="/despesas/:id" component={BillPage} />
       {/* <Route path="/login" component={LoginPage} /> 404 - TODO */}
     </Switch>
   );

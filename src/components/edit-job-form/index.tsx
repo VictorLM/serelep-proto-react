@@ -70,7 +70,7 @@ export const EditJobForm: React.FC = (): ReactElement => {
       setLoading(false);
       if (result) {
         toast.success('Job editado com sucesso');
-        history.push('/jobs');
+        history.push(`/jobs/${id}`);
       }
     }
   }

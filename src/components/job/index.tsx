@@ -183,7 +183,7 @@ export const SingleJob: React.FC = (): ReactElement => {
                 </tr>
                 <tr>
                   <td>Criado em:</td>
-                  <td className="info">{job?.createdAt.toLocaleString('pt-BR', { dateStyle: 'short' })}</td>
+                  <td className="info">{job?.createdAt.toLocaleString()}</td>
                 </tr>
                 <tr>
                   <td>ID:</td>
@@ -227,7 +227,7 @@ export const SingleJob: React.FC = (): ReactElement => {
 
               <JobValueCard
                 type="portion"
-                value={job?.payments[0].value}
+                value={sumBy(job?.payments, 'value') / (job?.payments.length || 1)}
                 times={job?.payments.length}
               />
 
@@ -253,7 +253,7 @@ export const SingleJob: React.FC = (): ReactElement => {
         <div className={styles.main_card}>
 
           <div className={`card card-white ${styles.info_card}`} style={{ height: 'fit-content' }}>
-            <h3>Notas</h3>
+            <h3>Anotações</h3>
 
             {loadingNotes ? <Loader />
               : (
@@ -270,7 +270,7 @@ export const SingleJob: React.FC = (): ReactElement => {
 
                     ))
                   ) : (
-                    <p className={styles.not_found}>Nenhuma nota registrada</p>
+                    <p className={styles.not_found}>Nenhuma anotação registrada</p>
                   )}
 
                   <form className={styles.notes_form} onSubmit={(e) => handleCreateJobNote(e)}>
@@ -312,8 +312,12 @@ export const SingleJob: React.FC = (): ReactElement => {
                     job?.payments.map((payment, index) => (
 
                       <tr key={payment.id}>
-                        <td>{`Parcela ${index + 1}`}</td>
-                        <td>{payment.dueDate.toLocaleString('pt-BR', { dateStyle: 'short' })}</td>
+                        <td className="info link-view">
+                          <Link to={`/pagamentos/${payment.id}`}>
+                            {`Parcela ${index + 1}`}
+                          </Link>
+                        </td>
+                        <td>{payment.dueDate.toLocaleString('pt-BR', { timeZone: 'Europe/London', dateStyle: 'short' })}</td>
                         <td>{`R$ ${payment.value.toFixed(2).replace('.', ',')}`}</td>
                         <td>
                           {payment.payed ? (
@@ -356,7 +360,11 @@ export const SingleJob: React.FC = (): ReactElement => {
                     job?.bills.map((bill) => (
 
                       <tr key={bill.id}>
-                        <td>{bill.name}</td>
+                        <td className="info link-view">
+                          <Link to={`/despesas/${bill.id}`}>
+                            {bill.name}
+                          </Link>
+                        </td>
                         <td>{setSubTypePill(bill.subType)}</td>
                         <td>{`R$ ${bill.value.toFixed(2).replace('.', ',')}`}</td>
                         <td>

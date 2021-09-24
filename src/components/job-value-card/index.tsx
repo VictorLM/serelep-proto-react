@@ -34,7 +34,7 @@ export const JobValueCard: React.FC<ValueCard> = ({
     icon = 'happy_money.png';
     spanColor = <span className="green">&#11044;</span>;
   } else if (type === 'portion') {
-    title = `Valor parcela - ${times} x`;
+    title = `Valor parcelado - ${times} x`;
     icon = 'happy_money.png';
     spanColor = <span className="yellow">&#11044;</span>;
   }
