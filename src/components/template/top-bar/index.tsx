@@ -1,6 +1,7 @@
-import React, { ReactElement, useContext } from 'react';
+import React, { ReactElement, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
+import { DashboardFilters } from '../../dashboard';
 
 import styles from './styles.module.scss';
 
@@ -8,10 +9,26 @@ type TopBarProps = {
   title: string;
   subtitle: string;
   addButton: boolean;
+  // eslint-disable-next-line
+  dashboardFilters?: DashboardFilters;
+  // eslint-disable-next-line
+  setDashboardFilters?: React.Dispatch<React.SetStateAction<DashboardFilters>>;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ title, subtitle, addButton }): ReactElement => {
+export const TopBar: React.FC<TopBarProps> = ({
+  title, subtitle, addButton, dashboardFilters, setDashboardFilters,
+}): ReactElement => {
   const { user, handleLogout } = useContext(AuthContext);
+  const [month, setMonth] = useState(String(dashboardFilters?.month));
+  const [year, setYear] = useState(String(dashboardFilters?.year));
+  const [toggleFilters, setToggleFilters] = useState(false);
+
+  function handleSetDashboardFilters(): void {
+    if (setDashboardFilters) {
+      setDashboardFilters({ month: Number(month), year: Number(year) });
+      setToggleFilters(false);
+    }
+  }
 
   return (
     <header className={styles.header}>
@@ -30,10 +47,80 @@ export const TopBar: React.FC<TopBarProps> = ({ title, subtitle, addButton }): R
       </div>
 
       {title === 'Dashboard' && (
-        <button className={styles.filters} type="button" onClick={() => console.log('TODO')}>
-          <span>Filtros</span>
-          <img src="/images/filters.png" alt="Filtros" />
-        </button>
+        <>
+          <button
+            className={styles.filters_btn}
+            type="button"
+            onClick={() => setToggleFilters(true)}
+          >
+            <span>Filtros</span>
+            <img src="/images/filters.png" alt="Filtros" />
+          </button>
+
+          {toggleFilters && (
+
+            <div className={styles.filters}>
+
+              <div className={`card card-white ${styles.filters_content}`}>
+
+                <button
+                  className={styles.close}
+                  type="button"
+                  onClick={() => setToggleFilters(false)}
+                >
+                  &times;
+                </button>
+
+                <div className={`card card-white ${styles.filters_content_content}`}>
+
+                  <div className={styles.selects}>
+
+                    <label htmlFor="month">
+                      <span>Mês</span>
+                      <select
+                        name="month"
+                        value={month}
+                        onChange={(e) => setMonth(e.target.value)}
+                      >
+                        <option disabled>Mês</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setembro</option>
+                        <option value="10">Outubro</option>
+                      </select>
+                    </label>
+
+                    <label htmlFor="month">
+                      <span>Ano</span>
+                      <select
+                        name="year"
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
+                      >
+                        <option disabled>Ano</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                      </select>
+                    </label>
+
+                  </div>
+
+                  <button
+                    className={styles.filters_btn}
+                    type="button"
+                    onClick={() => handleSetDashboardFilters()}
+                  >
+                    <span>Filtrar</span>
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+          )}
+
+        </>
       )}
 
       <div className={styles.user}>

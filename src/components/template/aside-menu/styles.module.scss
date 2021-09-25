@@ -39,31 +39,57 @@ aside.aside {
     }
   }
 
-  button.add_btn {
-    background-color: var(--gray-700) !important;
-    height: 3rem;
-    border: none;
-    color: var(--white);
-    padding: .25rem 1rem;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-    font-size: 1.05rem;
-    font-weight: 300;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: .8rem;
-    &:hover {
-      transform: scale(1.1);
-      background-color: none;
-      color: var(--gray-100);
+  div.add_btn_dropdown {
+    position: relative;
+
+    button.add_btn {
+      background-color: var(--gray-700) !important;
+      height: 3rem;
       border: none;
+      color: var(--white);
+      padding: .25rem 1rem;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      font-size: 1.05rem;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      gap: .8rem;
+      &:hover {
+        transform: scale(1.1);
+        background-color: none;
+        color: var(--gray-100);
+        border: none;
+      }
+      img {
+        max-height: 2.2em;
+        background-color: var(--white);
+        padding: .5rem;
+        border-radius: 10%;
+      }
     }
-    img {
-      max-height: 2.2em;
-      background-color: var(--white);
-      padding: .5rem;
-      border-radius: 10%;
+
+    ol {
+      position: absolute;
+      top: -28px;
+      right: -100px;
+      background: var(--gray-100);
+      border-radius: .5rem;
+      list-style: none;
+      li {
+        border-radius: .5rem;
+        transition: all 0.2s ease-in-out;
+        a {
+          padding: .5rem 1rem;
+          text-decoration: none;
+          color: var(--gray-500);
+          display: block;
+        }
+        &:hover {
+          background: var(--gray-300);
+        }
+      }
     }
   }
 }

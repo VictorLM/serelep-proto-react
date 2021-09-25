@@ -57,7 +57,6 @@ export const NewJobForm: React.FC = (): ReactElement => {
     tempPayments.push(newPayment);
     setPayments(tempPayments);
     setPaymentDueDate('');
-    // TODO - BOTÃO LIMPAR PAGAMENTOS PARA RESETAR
   }
 
   function cleanPayments(): void {

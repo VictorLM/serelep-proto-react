@@ -4,7 +4,66 @@ header.header {
   justify-content: space-between;
   margin-bottom: 2rem;
 
-  button.filters {
+  div.filters {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+    div.filters_content {
+      // background-color: var(--gray-100);
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 0 .5rem;
+      border: 1px solid var(--gray-300);
+      width: fit-content;
+
+      button.close {
+        padding: 0;
+        // height: 3rem;
+        border: 0;
+        background: none;
+        color: var(--gray-500);
+        float: right;
+        font-size: 3rem;
+        &:hover {
+          color: var(--gray-300);
+        }
+      }
+      div.filters_content_content {
+        padding: 3rem;
+
+        label {
+          span {
+            display: block;
+            margin-bottom: .25rem;
+          }
+        }
+        div.selects {
+          display: flex;
+          gap: 1rem;
+        }
+
+        button {
+          display: inline-block;
+          margin-top: 1rem;
+          text-align: center;
+          width: 100%;
+          background: var(--green);
+          color: var(--white);
+          &:hover {
+            background: var(--gray-500);
+          }
+        }
+      }
+    }
+  }
+
+  button.filters_btn {
     padding: .5rem .75rem;
     border: solid 2px var(--gray-300);
     background-color: var(--gray-100);

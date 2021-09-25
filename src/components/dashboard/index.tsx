@@ -12,6 +12,11 @@ import { ValueCard } from '../value-card';
 
 import styles from './styles.module.scss';
 
+export type DashboardFilters = {
+  month: number;
+  year: number;
+}
+
 export const Dashboard: React.FC = (): ReactElement => {
   const [values, setValues] = useState<DashboardValues>();
   const [loadingValues, setLoadingValues] = useState(true);
@@ -19,25 +24,29 @@ export const Dashboard: React.FC = (): ReactElement => {
   const [loadingJobs, setLoadingJobs] = useState(true);
   const [chartValues, setChartValues] = useState<DashboardValues[]>();
   const [loadingChartValues, setLoadingChartValues] = useState(true);
+  const [filters, setFilters] = useState<DashboardFilters>({
+    month: new Date().getMonth() + 1,
+    year: new Date().getFullYear(),
+  });
 
   useEffect(() => {
     (async () => {
-      const foundValues = await getDashboardValues();
+      setLoadingValues(true);
+      setLoadingJobs(true);
+      //
+      const foundValues = await getDashboardValues(filters.month, filters.year);
       setValues(foundValues);
       setLoadingValues(false);
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const foundJobs = await getDashboardJobs();
+      //
+      const foundJobs = await getDashboardJobs(filters.month, filters.year);
       setJobs(foundJobs);
       setLoadingJobs(false);
     })();
-  }, []);
+  }, [filters]);
 
   useEffect(() => {
     (async () => {
+      setLoadingChartValues(true);
       const foundChartValues = await getDashboardChartValues();
       setChartValues(foundChartValues);
       setLoadingChartValues(false);
@@ -52,6 +61,8 @@ export const Dashboard: React.FC = (): ReactElement => {
           title="Dashboard"
           subtitle="Bem vindo ao controle financeiro =)"
           addButton={false}
+          dashboardFilters={filters}
+          setDashboardFilters={setFilters}
         />
 
         {loadingValues ? <Loader />

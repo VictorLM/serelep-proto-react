@@ -23,8 +23,7 @@ export async function login(
 
 export async function logout(): Promise<boolean> {
   try {
-    // TODO - Não funciona. Não faço idéia
-    await api.post('/auth/logout', { withCredentials: true });
+    await api.post('/auth/logout', {}, { withCredentials: true });
     return true;
   } catch (err: unknown) {
     catchBlock(err);

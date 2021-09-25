@@ -40,10 +40,16 @@ export async function getDashboardChartValues(): Promise<DashboardValues[] | und
   }
 }
 
-export async function getDashboardJobs(): Promise<DashboardJobs | undefined> {
+export async function getDashboardJobs(
+  month?: number, year?: number,
+): Promise<DashboardJobs | undefined> {
   try {
     const { data } = await api.get('/dashboard/jobs', {
       withCredentials: true,
+      params: {
+        month: month || null,
+        year: year || null,
+      },
     });
 
     const dashboardJobs: DashboardJobs = {
@@ -59,10 +65,16 @@ export async function getDashboardJobs(): Promise<DashboardJobs | undefined> {
   }
 }
 
-export async function getDashboardValues(): Promise<DashboardValues | undefined> {
+export async function getDashboardValues(
+  month?: number, year?: number,
+): Promise<DashboardValues | undefined> {
   try {
     const { data } = await api.get('/dashboard/values', {
       withCredentials: true,
+      params: {
+        month: month || null,
+        year: year || null,
+      },
     });
 
     const dashboardValues: DashboardValues = {
