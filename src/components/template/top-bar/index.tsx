@@ -83,9 +83,18 @@ export const TopBar: React.FC<TopBarProps> = ({
                         onChange={(e) => setMonth(e.target.value)}
                       >
                         <option disabled>Mês</option>
+                        <option value="1">Janeiro</option>
+                        <option value="2">Fevereiro</option>
+                        <option value="3">Março</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Maio</option>
+                        <option value="6">Junho</option>
+                        <option value="7">Julho</option>
                         <option value="8">Agosto</option>
                         <option value="9">Setembro</option>
                         <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
                       </select>
                     </label>
 
@@ -100,6 +109,8 @@ export const TopBar: React.FC<TopBarProps> = ({
                         <option value="2021">2021</option>
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
                       </select>
                     </label>
 
