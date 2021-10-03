@@ -208,7 +208,7 @@ export const Payments: React.FC = (): ReactElement => {
                     ))
                   ) : (
                     <tr className="not-found-results">
-                      <td colSpan={5}>
+                      <td colSpan={6}>
                         <h2>Nenhum pagamento encontrado</h2>
                       </td>
                     </tr>

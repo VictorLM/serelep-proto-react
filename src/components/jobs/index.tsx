@@ -231,7 +231,7 @@ export const Jobs: React.FC = (): ReactElement => {
                     ))
                   ) : (
                     <tr className="not-found-results">
-                      <td colSpan={5}>
+                      <td colSpan={7}>
                         <h2>Nenhum job encontrado</h2>
                       </td>
                     </tr>

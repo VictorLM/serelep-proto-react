@@ -292,7 +292,7 @@ export const Bills: React.FC = (): ReactElement => {
                     ))
                   ) : (
                     <tr className="not-found-results">
-                      <td colSpan={5}>
+                      <td colSpan={6}>
                         <h2>Nenhuma despesa encontrada</h2>
                       </td>
                     </tr>
