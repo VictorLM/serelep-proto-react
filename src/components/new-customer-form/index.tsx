@@ -40,7 +40,7 @@ export const NewCustomerForm: React.FC = (): ReactElement => {
 
     if (doc.length < 11 || doc.length > 14) {
       formErrors = true;
-      toast.error('Nome deve ter entre 11 e 14 caracteres');
+      toast.error('CPF / CNPJ deve ter entre 11 e 14 caracteres');
       return;
     }
 
