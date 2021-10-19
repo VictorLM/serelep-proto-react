@@ -1,46 +1,60 @@
-# Getting Started with Create React App
+<p align="center">
+  <a href="https://app.avincerstudio.com/" target="_blank">
+    <img src="https://app.avincerstudio.com/images/logo_black.png" alt="Avincer" />
+  </a>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center" style="border-bottom: none">
+  <a href="https://app.avincerstudio.com/" target="_blank">Controle Financeiro - Avincer Studio</a>
+</h1>
 
-## Available Scripts
+<p>
+  Esse projeto é o front-end (UI). Veja o back-end (API) <a href="https://github.com/VictorLM/serelep-proto-api" target="_blank">aqui.</a>
+</p>
 
-In the project directory, you can run:
+<h1 id="descricao">Descrição</h1>
 
-### `npm start`
+<p>
+  Controle financeiro / ERP para profissionais do mercado criativo. Essa aplicação é um protótipo do sistema ERP Serelep, idealizado pelo designer brasileiro Jonathan Santos. Todos os direitos reservados.
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<h1 id="tabela-de-conteudo">Tabela de conteúdos</h1>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<!--ts-->
+   * [Tabela de Conteúdo](#tabela-de-conteudo)
+   * [Descrição](#descricao)
+   * [Preview](#preview)
+   * [Tecnologias](#tecnologias)
+   * [Autor](#autor)
+<!--te-->
 
-### `npm test`
+<h1 align="center" id="preview">Preview</h1>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p align="center">
+  <img src="https://i.ibb.co/K7YYBBn/AVINCER.png" alt="Avincer" />
+</p>
 
-### `npm run build`
+<h1 align="center" id="tecnologias">Tecnologias</h1>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<p>
+    As seguintes ferramentas foram usadas na construção deste projeto:
+</p>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [Node.js](https://nodejs.org/en/)
+- [React](https://pt-br.reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Sass](https://sass-lang.com/)
+- [React-toastify](https://fkhadra.github.io/react-toastify/introduction)
+- [Chart.JS](https://www.chartjs.org/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<h1 align="center" id="autor">Autor</h1>
 
-### `npm run eject`
+<p>
+  Made with ❤️ by <b>Victor Meireles</b> 👋🏽 Get in touch!
+  <br/>
+  Feito com ❤️ por <b>Victor Meireles</b> 👋🏽 Entre em contato!
+</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/VictorLM)](https://github.com/VictorLM)
+[![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/victorlucasmeireles/)](https://www.linkedin.com/in/victorlucasmeireles/)
+[![Gmail Badge](https://img.shields.io/badge/-Email-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:victor.meireles.dev@gmail.com)](mailto:victor.meireles.dev@gmail.com)
