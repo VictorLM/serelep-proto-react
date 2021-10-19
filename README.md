@@ -28,13 +28,13 @@
    * [Autor](#autor)
 <!--te-->
 
-<h1 align="center" id="preview">Preview</h1>
+<h1 id="preview">Preview</h1>
 
 <p align="center">
   <img src="https://i.ibb.co/K7YYBBn/AVINCER.png" alt="Avincer" />
 </p>
 
-<h1 align="center" id="tecnologias">Tecnologias</h1>
+<h1 id="tecnologias">Tecnologias</h1>
 
 <p>
     As seguintes ferramentas foram usadas na construção deste projeto:
@@ -47,7 +47,7 @@
 - [React-toastify](https://fkhadra.github.io/react-toastify/introduction)
 - [Chart.JS](https://www.chartjs.org/)
 
-<h1 align="center" id="autor">Autor</h1>
+<h1 id="autor">Autor</h1>
 
 <p>
   Made with ❤️ by <b>Victor Meireles</b> 👋🏽 Get in touch!
