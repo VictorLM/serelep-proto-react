@@ -10,6 +10,8 @@
 
 <p>
   Esse projeto é o front-end (UI). Veja o back-end (API) <a href="https://github.com/VictorLM/serelep-proto-api" target="_blank">aqui.</a>
+  <br/>
+  Designed by <a href="https://avincer.co/" target="_blank">Avincer Studio.</a>
 </p>
 
 <h1 id="descricao">Descrição</h1>
